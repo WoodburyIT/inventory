@@ -2,8 +2,12 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET		/asset/:id					controllers.DataView.viewAsset(id : Long)
-
+GET		/asset/:id					controllers.ViewData.viewAsset(id : Long)
+POST	/asset/:id					controllers.EditData.viewAsset(id:Long)
+DEL		/asset/:id					controllers.EditData.deleteAsset(id : Long)
+GET		/asset/inventorynum/:invNum	controllers.ViewData.byInventoryNum(invNum: String)
+GET		/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset : Integer ?= 0, priority : Integer?= 0, search : String ?= null)
+	
 
 # Home page
 GET     /                           controllers.Application.index()
