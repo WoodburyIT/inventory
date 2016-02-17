@@ -6,6 +6,78 @@
 <link rel="stylesheet" type="text/css" href="view.css" media="all">
 <script type="text/javascript" src="view.js"></script>
 <script type="text/javascript" src="calendar.js"></script>
+
+  <script type="text/javascript">
+      var ck_nameType = /^[A-Za-z0-9 \-]{1,50}$/;
+      var ck_number = /^[A-Za-z0-9 \-]{0,25}$/;
+      var ck_MM = /^(0?[1-9]|1[012])$/;
+      var ck_DD = /^(0[1-9]|[12]\d|3[01])$/;
+      var ck_YYYY = /^[0-9]{0,4}$/;
+
+
+      function validate()
+      {
+      
+        if( document.createCheckoutAssetForm.element_createassname.value == "" )
+         {
+            alert( "Asset Name required!" );
+            document.createCheckoutAssetForm.element_createassname.focus() ;
+            return false;
+         }
+        
+         if (!ck_nameType.test(document.createCheckoutAssetForm.element_createassname.value))
+         {
+            alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
+            document.createCheckoutAssetForm.element_createassname.focus() ;
+            return false;
+         }
+        
+         if( document.createCheckoutAssetForm.element_createasstype.value == "" )
+         {
+            alert( "Asset Type required!" );
+            document.createCheckoutAssetForm.element_createasstype.focus() ;
+            return false;
+         }
+        
+        if (!ck_nameType.test(document.createCheckoutAssetForm.element_createasstype.value))
+         {
+            alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
+            document.createCheckoutAssetForm.element_createasstype.focus() ;
+            return false;
+         }
+        
+        if (!ck_number.test(document.createCheckoutAssetForm.element_createinvnumb.value))
+         {
+            alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
+            document.createCheckoutAssetForm.element_createinvnumb.focus() ;
+            return false;
+         }
+        
+        if (!ck_MM.test(document.createCheckoutAssetForm.element_3_1.value))
+         {
+            alert( "Enter a valid month." );
+            document.createCheckoutAssetForm.element_3_1.focus() ;
+            return false;
+         }
+        
+        if (!ck_DD.test(document.createCheckoutAssetForm.element_3_2.value))
+         {
+            alert( "Enter a valid day." );
+            document.createCheckoutAssetForm.element_3_2.focus() ;
+            return false;
+         }
+        
+        if (!ck_YYYY.test(document.createCheckoutAssetForm.element_3_3.value))
+         {
+            alert( "Enter a valid year" );
+            document.createCheckoutAssetForm.element_3_3.focus() ;
+            return false;
+         }
+                 
+         return( true );
+      }
+</script>   
+
 </head>
 <body id="main_body" >
 	
@@ -13,7 +85,7 @@
 	<div id="form_container">
 	
 		<h1><a>Create Checkout Asset</a></h1>
-		<form id="form_1101196" class="appnitro"  method="post" action="">
+		<form id="form_1101196" name="createCheckoutAssetForm" class="appnitro"  method="post" action="" onsubmit="return(validate());">
 					<div class="form_description">
 			<h2>Create Checkout Asset</h2>
 			<p>For Asset Name, please use the suggested naming convention of Manufacturer, Model, Type, and Asset Number.
