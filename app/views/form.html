@@ -10,46 +10,45 @@
   <script type="text/javascript">
       var ck_nameType = /^[A-Za-z0-9 \-]{1,50}$/;
       var ck_number = /^[A-Za-z0-9 \-]{0,25}$/;
-      var ck_MM = /^(0?[1-9]|1[012])$/;
-      var ck_DD = /^(0[1-9]|[12]\d|3[01])$/;
-      var ck_YYYY = /^[0-9]{0,4}$/;
-
+      var ck_MM = /^(0?[1-9]|1[012]|)$/;
+      var ck_DD = /^(0[1-9]|[12]\d|3[01]|)$/;
+      var ck_YYYY = /^[0-9]{0,4}|$/;
 
       function validate()
       {
       
-        if( document.createCheckoutAssetForm.element_createassname.value == "" )
+        if( document.createCheckoutAssetForm.name.value == "" )
          {
             alert( "Asset Name required!" );
-            document.createCheckoutAssetForm.element_createassname.focus() ;
+            document.createCheckoutAssetForm.name.focus() ;
             return false;
          }
         
-         if (!ck_nameType.test(document.createCheckoutAssetForm.element_createassname.value))
+         if (!ck_nameType.test(document.createCheckoutAssetForm.name.value))
          {
             alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
-            document.createCheckoutAssetForm.element_createassname.focus() ;
+            document.createCheckoutAssetForm.name.focus() ;
             return false;
          }
         
-         if( document.createCheckoutAssetForm.element_createasstype.value == "" )
+         if( document.createCheckoutAssetForm.assetType.value == "" )
          {
             alert( "Asset Type required!" );
-            document.createCheckoutAssetForm.element_createasstype.focus() ;
+            document.createCheckoutAssetForm.assetType.focus() ;
             return false;
          }
         
-        if (!ck_nameType.test(document.createCheckoutAssetForm.element_createasstype.value))
+        if (!ck_nameType.test(document.createCheckoutAssetForm.assetType.value))
          {
             alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
-            document.createCheckoutAssetForm.element_createasstype.focus() ;
+            document.createCheckoutAssetForm.assetType.focus() ;
             return false;
          }
         
-        if (!ck_number.test(document.createCheckoutAssetForm.element_createinvnumb.value))
+        if (!ck_number.test(document.createCheckoutAssetForm.inventoryNumber.value))
          {
             alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
-            document.createCheckoutAssetForm.element_createinvnumb.focus() ;
+            document.createCheckoutAssetForm.inventoryNumber.focus() ;
             return false;
          }
         
@@ -73,6 +72,7 @@
             document.createCheckoutAssetForm.element_3_3.focus() ;
             return false;
          }
+		 
                  
          return( true );
       }
@@ -99,22 +99,22 @@
 			<ul >
 			
 					<li id="li_createassname" >
-		<label class="description" for="element_createassname">* Asset Name </label>
+		<label class="description" for="name">* Asset Name </label>
 		<div>
-			<input id="element_createassname" name="element_createassname" class="element text large" type="text" maxlength="50" value=""/> 
+			<input id="name" name="name" class="element text large" type="text" maxlength="50" value=""/> 
 		</div><p class="guidelines" id="guide_createassname"><small>Please follow the naming convention; Manufacturer, Model, Type, Asset Number. (ex. Dell Latitude Laptop 01, Epson Projector 01, Kensington Presentation Pointer 01, etc.)</small></p> 
 		</li>		<li id="li_createasstype" >
-		<label class="description" for="element_createasstype">* Asset Type </label>
+		<label class="description" for="assetType">* Asset Type </label>
 		<div>
-			<input id="element_createasstype" name="element_createasstype" class="element text medium" type="text" maxlength="25" value=""/> 
+			<input id="assetType" name="assetType" class="element text medium" type="text" maxlength="25" value=""/> 
 		</div><p class="guidelines" id="guide_createasstype"><small>Such as; Laptop, Projector, Clicker, Video Cable, Cable Adapter etc.</small></p> 
 		</li>		<li id="li_createinvnumb" >
-		<label class="description" for="element_createinvnumb">Inventory Number </label>
+		<label class="description" for="inventoryNumber">Inventory Number </label>
 		<div>
-			<input id="element_createinvnumb" name="element_createinvnumb" class="element text small" type="text" maxlength="15" value=""/> 
+			<input id="inventoryNumber" name="inventoryNumber" class="element text small" type="text" maxlength="15" value=""/> 
 		</div><p class="guidelines" id="guide_createinvnumb"><small>UVU Inventory Number. This is only needed for assets with inventory stickers.</small></p> 
 		</li>		<li id="li_3" >
-		<label class="description" for="element_3">Purchase Date </label>
+		<label class="description" for="purchaseDate">Purchase Date </label>
 		<span>
 			<input id="element_3_1" name="element_3_1" class="element text" size="2" maxlength="2" value="" type="text"> /
 			<label for="element_3_1">MM</label>
@@ -127,25 +127,11 @@
 	 		<input id="element_3_3" name="element_3_3" class="element text" size="4" maxlength="4" value="" type="text">
 			<label for="element_3_3">YYYY</label>
 		</span>
-	
-		<span id="calendar_3">
-			<img id="cal_img_3" class="datepicker" src="calendar.gif" alt="Pick a date.">	
-		</span>
-		<script type="text/javascript">
-			Calendar.setup({
-			inputField	 : "element_3_3",
-			baseField    : "element_3",
-			displayArea  : "calendar_3",
-			button		 : "cal_img_3",
-			ifFormat	 : "%B %e, %Y",
-			onSelect	 : selectDate
-			});
-		</script>
 		<p class="guidelines" id="guide_createpurchasedate"><small>This is only needed for assets with inventory stickers.</small></p> 
 		</li>		<li id="li_createprioritylvl" >
-		<label class="description" for="element_createprioritylvl">* Priority level </label>
+		<label class="description" for="priorityLevel">* Priority Level </label>
 		<div>
-		<select class="element select small" id="element_createprioritylvl" name="element_createprioritylvl"> 
+		<select class="element select small" id="priorityLevel" name="priorityLevel" required> 
 			<option value="" selected="selected"></option>
 <option value="1_createprioritylvl" >1</option>
 <option value="2_createprioritylvl" >2</option>
@@ -161,14 +147,14 @@
 		</select>
 		</div><p class="guidelines" id="guide_createprioritylvl"><small>This will determine the order in which the asset appears on the checkout calendar.</small></p> 
 		</li>		<li id="li_createassdescription" >
-		<label class="description" for="element_createassdescription">Description/Notes </label>
+		<label class="description" for="description">Description/Notes </label>
 		<div>
-			<textarea id="element_createassdescription" name="element_createassdescription" class="element textarea medium" maxlength="255"></textarea> 
+			<textarea id="description" name="description" class="element textarea medium" maxlength="255"></textarea> 
 		</div><p class="guidelines" id="guide_createassdescription"><small>Use this field for anything you want to write about the asset.</small></p> 
 		</li>		<li id="li_createreserveable" >
-		<label class="description" for="element_createreserveable">* Should this item be available for reserved checkout? </label>
+		<label class="description" for="highProfile">* Should this item be available for reserved checkout? </label>
 		<div>
-		<select class="element select small" id="element_createreserveable" name="element_createreserveable"> 
+		<select class="element select small" id="highProfile" name="highProfile" required> 
 			<option value="" selected="selected"></option>
 <option value="yes_createreserveable" >Yes</option>
 <option value="no_createreserveable" >No</option>
