@@ -3,11 +3,13 @@
 # ~~~~
 
 GET		/asset/:id					controllers.ViewData.viewAsset(id : Long)
-POST	/asset/:id					controllers.EditData.viewAsset(id:Long)
-DEL		/asset/:id					controllers.EditData.deleteAsset(id : Long)
+POST	/asset/:id					controllers.EditData.editAsset(id:Long)
+POST	/asset						controllers.EditData.newAsset()
+DELETE	/asset/:id					controllers.EditData.deleteAsset(id : Long)
 GET		/asset/inventorynum/:invNum	controllers.ViewData.byInventoryNum(invNum: String)
 GET		/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset : Integer ?= 0, priority : Integer?= 0, search : String ?= null)
 	
+GET		/newAssetForm				controllers.Application.newAssetForm()
 
 # Home page
 GET     /                           controllers.Application.index()

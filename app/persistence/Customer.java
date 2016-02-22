@@ -23,7 +23,7 @@ public class Customer {
 		return assetId;
 	}
 
-	public void setAssetId(long assetId) {
+	public void setAssetId(long assetId) { 
 		this.assetId = assetId;
 	}
 

@@ -25,5 +25,10 @@ public class Application extends Controller {
 		JPA.em().persist(asset);
         return ok(views.html.index.render("Your new application is ready.")); 
     }
+	
+	public Result newAssetForm() {
+		
+		return ok(views.html.form.render());
+	}
 
 }
