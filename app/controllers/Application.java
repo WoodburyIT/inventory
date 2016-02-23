@@ -28,7 +28,7 @@ public class Application extends Controller {
 	
 	public Result newAssetForm() {
 		
-		return ok(views.html.form.render());
+		return ok();
 	}
 
 }
