@@ -1,0 +1,48 @@
+body{
+	background-color: gray;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+	padding-left:10px;
+}
+
+h1{
+	margin: 10px;
+	padding: 10px 0px 0px 0px;
+}
+
+h5{
+	margin: 0px;
+}
+
+#container{
+	background-color: white;
+	
+	
+}
+
+#content{
+	clear: both;
+	padding: 10x;
+}
+
+#header{
+	background-color: green;
+	color: white;
+	padding: 5px 0px 0px 0px;
+} 
+
+#links-header{
+	background-color: black;
+	padding: 1px 0px 1px 0px
+}
+
+#footer{
+	clear: both;
+	padding: 5px 5px 0px 0px;
+	background-color: green;
+	color: white;
+	list-style-type: none;
+}
