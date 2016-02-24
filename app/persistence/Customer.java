@@ -11,7 +11,7 @@ public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long assetId;
+	long customerId;
 	
 	private String firstName;
 	private String lastName;
@@ -21,12 +21,12 @@ public class Customer {
 	@Column(nullable = true, columnDefinition="varchar(4000)")
 	private String notes;
 
-	public long getAssetId() {
-		return assetId;
+	public long getCustomerId() {
+		return customerId;
 	}
 
-	public void setAssetId(long assetId) { 
-		this.assetId = assetId;
+	public void setCustomerId(long customerId) { 
+		this.customerId = customerId;
 	}
 
 	public String getFirstName() {

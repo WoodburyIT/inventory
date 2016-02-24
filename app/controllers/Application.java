@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import datadefinitions.AssetType;
 import persistence.Asset;
+import persistence.Customer;
 import persistence.TestEntity;
 import play.*;
 import play.db.jpa.JPA;
@@ -16,19 +17,20 @@ public class Application extends Controller {
 
 	@Transactional
     public Result index() {
-		Asset asset = new Asset();
-		asset.setName("New Laptop");
-		asset.setAssetType(AssetType.LAPTOP);
-		asset.setPriorityLevel(8);
-		asset.setPurchaseDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
-		asset.setDescription("This asset probably has something complicated about it that needs describing");
-		JPA.em().persist(asset);
+		System.out.println("in index");
+		Customer customer = new Customer();
+		customer.setFirstName("John"); 
+		customer.setLastName("Jones");
+		customer.setEmail("JohnJonesTesting@gmail.com");
+		customer.setPhone("801-995-9999");
+		customer.setNotes("John has a habit of returning things late -- Michael");
+		JPA.em().persist(customer);
         return ok(views.html.index.render("Your new application is ready.")); 
     }
 	
 	public Result newAssetForm() {
 		
-		return ok();
+		return ok(views.html.form.render());
 	}
 
 }

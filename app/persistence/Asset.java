@@ -17,13 +17,12 @@ public class Asset implements Comparable<Asset>{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long assetId;
 	
-	private String inventoryNumber;
+	private String inventoryNumber;		// Legacy inventory number
 	private String name;
 	private String description;
-	private Date purchaseDate;
-	private Integer priorityLevel;
+	private Date purchaseDate;			
+	private Integer priorityLevel;		// Ranged 1-10
 	
-	private boolean highProfile;
 	private AssetType assetType;
 
 	public long getAssetId() {
@@ -58,13 +57,6 @@ public class Asset implements Comparable<Asset>{
 		this.assetType = assetType;
 	}
 
-	public boolean isHighProfile() {
-		return highProfile;
-	}
-
-	public void setHighProfile(boolean highProfile) {
-		this.highProfile = highProfile;
-	}
 	public String getInventoryNumber() {
 		return inventoryNumber;
 	}
