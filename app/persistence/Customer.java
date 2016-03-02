@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import datadefinitions.CustomerType;
+
 @Entity
 public class Customer {
 
@@ -17,6 +19,10 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String phone;
+	
+	private CustomerType customerType;
+	private String uvid;
+	
 	
 	@Column(nullable = true, columnDefinition="varchar(4000)")
 	private String notes;

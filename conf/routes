@@ -2,12 +2,26 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+#	REST web service endpoints
 GET		/asset/:id					controllers.ViewData.viewAsset(id : Long)
 POST	/asset/:id					controllers.EditData.editAsset(id:Long)
 POST	/asset						controllers.EditData.newAsset()
 DELETE	/asset/:id					controllers.EditData.deleteAsset(id : Long)
+
+GET		/customer/:id				controllers.ViewData.viewCustomer(id : Long)
+POST	/customer/:id				controllers.EditData.editCustomer(id:Long)
+POST	/customer					controllers.EditData.newCustomer()
+DELETE	/customer/:id				controllers.EditData.deleteCustomer(id : Long)
+
+#GET		/checkout/:id				controllers.ViewData.viewCheckout(id : Long)
+#POST	/checkout/:id				controllers.EditData.editCheckout(id:Long)
+#POST	/checkout					controllers.EditData.newCheckout()
+#DELETE	/checkout/:id				controllers.EditData.deleteCheckout(id : Long)
+
 GET		/asset/inventorynum/:invNum	controllers.ViewData.byInventoryNum(invNum: String)
 GET		/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset : Integer ?= 0, priority : Integer?= 0, search : String ?= null)
+
+
 	
 GET		/newAssetForm				controllers.Application.newAssetForm()
 

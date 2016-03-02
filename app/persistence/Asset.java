@@ -24,6 +24,8 @@ public class Asset implements Comparable<Asset>{
 	private Integer priorityLevel;		// Ranged 1-10
 	
 	private AssetType assetType;
+	
+	private Date dateLost;
 
 	public long getAssetId() {
 		return assetId;
@@ -79,6 +81,14 @@ public class Asset implements Comparable<Asset>{
 
 	public void setPriorityLevel(Integer priorityLevel) {
 		this.priorityLevel = priorityLevel;
+	}
+	
+	public Date getDateLost() {
+		return dateLost;
+	}
+
+	public void setDateLost(Date dateLost) {
+		this.dateLost = dateLost;
 	}
 
 	@Override

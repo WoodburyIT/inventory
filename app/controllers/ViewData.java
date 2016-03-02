@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import persistence.Asset;
+import persistence.Customer;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -14,6 +15,12 @@ import play.mvc.Result;
 
 public class ViewData extends Controller {
 
+	@Transactional
+    public Result viewCustomer(long customerId) {
+		Customer customer = JPA.em().find(Customer.class, customerId);
+        return ok(Json.toJson(customer)); 
+    }
+	
 	@Transactional
     public Result viewAsset(long assetId) {
 		Asset asset = JPA.em().find(Asset.class, assetId);
@@ -51,5 +58,4 @@ public class ViewData extends Controller {
 		List<Asset> assets = q.setMaxResults(count).setFirstResult(offset).getResultList();
         return ok(Json.toJson(assets)); 
     }
-
 }
