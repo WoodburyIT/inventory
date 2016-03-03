@@ -27,7 +27,13 @@ public class EditData extends Controller{
 		String phone = requestData.get("phone");
 		String notes = requestData.get("notes");
 		
-		Customer customer = JPA.em().find(Customer.class, customerId);
+		Customer customer;
+		if(customerId ==0){
+			customer = new Customer();
+		}
+		else{
+			customer = JPA.em().find(Customer.class, customerId);
+		}
 		
 		customer.setFirstName(firstName);
 		customer.setLastName(lastName);
@@ -35,6 +41,7 @@ public class EditData extends Controller{
 		customer.setPhone(phone);
 		customer.setNotes(notes);
 		
+		JPA.em().merge(customer);
 		return ok();
 	}
 	
@@ -91,7 +98,7 @@ public class EditData extends Controller{
 		asset.setPriorityLevel(priorityLevel);
 		asset.setAssetType(assetType);
 		
-		return ok();
+		return ok(views.html.viewAsset.render(asset));
 	}
 	
 	@Transactional
@@ -121,7 +128,7 @@ public class EditData extends Controller{
 		asset.setAssetType(assetType);
 		
 		JPA.em().persist(asset);
-		return ok();
+		return ok(views.html.viewAsset.render(asset));
 	}
 	
 	@Transactional

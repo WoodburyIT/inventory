@@ -18,6 +18,8 @@ public class Application extends Controller {
 	@Transactional
     public Result index() {
 		System.out.println("in index");
+		Asset asset = new Asset();
+		
 		Customer customer = new Customer();
 		customer.setFirstName("John"); 
 		customer.setLastName("Jones");
@@ -29,8 +31,8 @@ public class Application extends Controller {
     }
 	
 	public Result newAssetForm() {
-		
-		return ok(views.html.form.render());
+		return ok();
+//		return ok(views.html.form.render());
 	}
 
 }

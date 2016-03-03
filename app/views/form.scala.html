@@ -1,3 +1,5 @@
+@(asset : _root_.persistence.Asset)
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -101,17 +103,17 @@
 					<li id="li_createassname" >
 		<label class="description" for="name">* Asset Name </label>
 		<div>
-			<input id="name" name="name" class="element text large" type="text" maxlength="50" value=""/> 
+			<input id="name" name="name" class="element text large" type="text" maxlength="50" value="@asset.getName()"/> 
 		</div><p class="guidelines" id="guide_createassname"><small>Please follow the naming convention; Manufacturer, Model, Type, Asset Number. (ex. Dell Latitude Laptop 01, Epson Projector 01, Kensington Presentation Pointer 01, etc.)</small></p> 
 		</li>		<li id="li_createasstype" >
 		<label class="description" for="assetType">* Asset Type </label>
 		<div>
-			<input id="assetType" name="assetType" class="element text medium" type="text" maxlength="25" value=""/> 
+			<input id="assetType" name="assetType" class="element text medium" type="text" maxlength="25" value="@asset.getAssetType()"/> 
 		</div><p class="guidelines" id="guide_createasstype"><small>Such as; Laptop, Projector, Clicker, Video Cable, Cable Adapter etc.</small></p> 
 		</li>		<li id="li_createinvnumb" >
 		<label class="description" for="inventoryNumber">Inventory Number </label>
 		<div>
-			<input id="inventoryNumber" name="inventoryNumber" class="element text small" type="text" maxlength="15" value=""/> 
+			<input id="inventoryNumber" name="inventoryNumber" class="element text small" type="text" maxlength="15" value="@asset.getInventoryNumber()"/> 
 		</div><p class="guidelines" id="guide_createinvnumb"><small>UVU Inventory Number. This is only needed for assets with inventory stickers.</small></p> 
 		</li>		<li id="li_3" >
 		<label class="description" for="purchaseDate">Purchase Date </label>

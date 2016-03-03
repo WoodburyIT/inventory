@@ -5,7 +5,7 @@
 #	REST web service endpoints
 GET		/asset/:id					controllers.ViewData.viewAsset(id : Long)
 POST	/asset/:id					controllers.EditData.editAsset(id:Long)
-POST	/asset						controllers.EditData.newAsset()
+POST	/asset						controllers.EditData.editAsset(id:Long = 0)
 DELETE	/asset/:id					controllers.EditData.deleteAsset(id : Long)
 
 GET		/customer/:id				controllers.ViewData.viewCustomer(id : Long)

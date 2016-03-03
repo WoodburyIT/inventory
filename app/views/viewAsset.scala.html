@@ -1,0 +1,10 @@
+@(asset : _root_.persistence.Asset)
+
+<div class="view-entity">
+	<h3>@asset.getName() (@asset.getAssetId())</h3>
+	<p>@asset.getInventoryNumber()</p>
+	<p>@asset.getAssetType()</p>
+	<p>@asset.getPriorityLevel()</p>
+	<p>@asset.getPurchaseDate()</p>
+	<p>@asset.getDescription</p>
+</div>

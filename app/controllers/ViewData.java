@@ -24,6 +24,18 @@ public class ViewData extends Controller {
 	@Transactional
     public Result viewAsset(long assetId) {
 		Asset asset = JPA.em().find(Asset.class, assetId);
+        return ok(views.html.viewAsset.render(asset)); 
+    }
+	
+	@Transactional
+    public Result getCustomer(long customerId) {
+		Customer customer = JPA.em().find(Customer.class, customerId);
+        return ok(Json.toJson(customer)); 
+    }
+	
+	@Transactional
+    public Result getAsset(long assetId) {
+		Asset asset = JPA.em().find(Asset.class, assetId);
         return ok(Json.toJson(asset)); 
     }
 	

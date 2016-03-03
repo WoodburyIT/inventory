@@ -98,5 +98,6 @@ public class Asset implements Comparable<Asset>{
         // other and 0 if they are supposed to be equal
 		return o.getPriorityLevel().compareTo(this.getPriorityLevel());
 	}
+	
 
 }
