@@ -41,7 +41,8 @@ public class EditData extends Controller{
 		customer.setPhone(phone);
 		customer.setNotes(notes);
 		
-		JPA.em().merge(customer);
+		customer = JPA.em().merge(customer);
+		
 		return ok();
 	}
 	
@@ -89,7 +90,13 @@ public class EditData extends Controller{
 		
 		AssetType assetType = AssetType.valueOf(assetTypeString);
 		
-		Asset asset = JPA.em().find(Asset.class, assetId);
+		Asset asset;
+		if(assetId == 0){
+			asset = new Asset();
+		}
+		else{
+			asset = JPA.em().find(Asset.class, assetId);
+		}
 		
 		asset.setInventoryNumber(inventoryNumber);
 		asset.setName(name);
@@ -98,36 +105,8 @@ public class EditData extends Controller{
 		asset.setPriorityLevel(priorityLevel);
 		asset.setAssetType(assetType);
 		
-		return ok(views.html.viewAsset.render(asset));
-	}
-	
-	@Transactional
-	public Result newAsset() throws ParseException{
-		DynamicForm requestData = Form.form().bindFromRequest();
-		String inventoryNumber = requestData.get("inventoryNumber");
-		String name = requestData.get("name");
-		String description = requestData.get("description");
-		String purchaseDateString = requestData.get("purchaseDate");
-		String priorityLevelString = requestData.get("priorityLevel");
-		String assetTypeString = requestData.get("assetType");
+		asset = JPA.em().merge(asset);
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		Date purchaseDate = formatter.parse(purchaseDateString);
-		
-		Integer priorityLevel = Integer.parseInt(priorityLevelString);
-		
-		AssetType assetType = AssetType.valueOf(assetTypeString);
-		
-		Asset asset = new Asset();
-		
-		asset.setInventoryNumber(inventoryNumber);
-		asset.setName(name);
-		asset.setDescription(description);
-		asset.setPurchaseDate(purchaseDate);
-		asset.setPriorityLevel(priorityLevel);
-		asset.setAssetType(assetType);
-		
-		JPA.em().persist(asset);
 		return ok(views.html.viewAsset.render(asset));
 	}
 	

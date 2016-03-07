@@ -8,6 +8,8 @@ POST	/asset/:id					controllers.EditData.editAsset(id:Long)
 POST	/asset						controllers.EditData.editAsset(id:Long = 0)
 DELETE	/asset/:id					controllers.EditData.deleteAsset(id : Long)
 
+GET 	/view/asset					controllers.Application.viewAsset(assetId : Long) 
+
 GET		/customer/:id				controllers.ViewData.viewCustomer(id : Long)
 POST	/customer/:id				controllers.EditData.editCustomer(id:Long)
 POST	/customer					controllers.EditData.newCustomer()

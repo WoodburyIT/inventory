@@ -20,7 +20,7 @@ public class CheckoutEvent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long checkoutEventId;
 	
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="checkoutEvent")
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="checkoutEvent") 
 	private List<CheckoutLineItem> lineItems = new ArrayList<CheckoutLineItem>();
 	
 	@ManyToOne

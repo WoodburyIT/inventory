@@ -34,5 +34,23 @@ public class Application extends Controller {
 		return ok();
 //		return ok(views.html.form.render());
 	}
+	
+	@Transactional
+	public Result viewAsset(Long assetId) {
+		Asset asset = JPA.em().find(Asset.class, assetId);
+		
+		return ok(views.html.viewAsset.render(asset));
+	}
+	
+	@Transactional
+	public Result editAsset(Long assetId) {
+		Asset asset = JPA.em().find(Asset.class, assetId);
+		
+		return ok(views.html.viewAsset.render(asset));
+	}
+	
+	public Result newAssetForm(){
+		
+	}
 
 }
