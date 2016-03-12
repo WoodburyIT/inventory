@@ -3,17 +3,17 @@
 # ~~~~
 
 #	REST web service endpoints
-GET		/asset/:id					controllers.ViewData.viewAsset(id : Long)
-POST	/asset/:id					controllers.EditData.editAsset(id:Long)
-POST	/asset						controllers.EditData.editAsset(id:Long = 0)
-DELETE	/asset/:id					controllers.EditData.deleteAsset(id : Long)
+GET		/api/asset/:id					controllers.ViewData.viewAsset(id : Long)
+POST	/api/asset/:id					controllers.EditData.editAsset(id:Long)
+POST	/api/asset						controllers.EditData.editAsset(id:Long = 0)
+DELETE	/api/asset/:id					controllers.EditData.deleteAsset(id : Long)
 
-GET 	/view/asset					controllers.Application.viewAsset(assetId : Long) 
 
-GET		/customer/:id				controllers.ViewData.viewCustomer(id : Long)
-POST	/customer/:id				controllers.EditData.editCustomer(id:Long)
-POST	/customer					controllers.EditData.newCustomer()
-DELETE	/customer/:id				controllers.EditData.deleteCustomer(id : Long)
+
+GET		/api/customer/:id				controllers.ViewData.viewCustomer(id : Long)
+POST	/api/customer/:id				controllers.EditData.editCustomer(id:Long)
+POST	/api/customer					controllers.EditData.editCustomer(id : Long = 0)
+DELETE	/api/customer/:id				controllers.EditData.deleteCustomer(id : Long)
 
 #GET		/checkout/:id				controllers.ViewData.viewCheckout(id : Long)
 #POST	/checkout/:id				controllers.EditData.editCheckout(id:Long)
@@ -25,7 +25,12 @@ GET		/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset
 
 
 	
-GET		/newAssetForm				controllers.Application.newAssetForm()
+GET		/newAsset				controllers.Application.newAssetForm()
+GET		/newCustomer			controllers.Application.newCustomerForm()
+GET		/editCustomer			controllers.Application.editCustomerForm(customerId : Long)
+
+GET 	/asset					controllers.Application.viewAsset(assetId : Long) 
+GET		/customer				controllers.Application.viewCustomer(customerId : Long)
 
 # Home page
 GET     /                           controllers.Application.index()

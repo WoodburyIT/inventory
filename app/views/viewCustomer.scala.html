@@ -1,0 +1,12 @@
+@(customer : _root_.persistence.Customer)
+
+
+@customer.getFirstName()
+@customer.getLastName()
+@customer.getCustomerType()
+@customer.getEmail()
+@customer.getPhone()
+@customer.getUvid()
+@customer.getNotes()
+
+<a href="/editCustomer?customerId=@customer.getCustomerId()">Edit &raquo;</a>

@@ -103,6 +103,12 @@
 					<li id="li_createassname" >
 		<label class="description" for="name">* Asset Name </label>
 		<div>
+			@if(asset == null){
+			} else {
+			}
+			@if(asset == null){
+			} else {
+			}
 			<input id="name" name="name" class="element text large" type="text" maxlength="50" value="@asset.getName()"/> 
 		</div><p class="guidelines" id="guide_createassname"><small>Please follow the naming convention; Manufacturer, Model, Type, Asset Number. (ex. Dell Latitude Laptop 01, Epson Projector 01, Kensington Presentation Pointer 01, etc.)</small></p> 
 		</li>		<li id="li_createasstype" >

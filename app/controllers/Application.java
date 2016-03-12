@@ -30,16 +30,17 @@ public class Application extends Controller {
         return ok(views.html.index.render("Your new application is ready.")); 
     }
 	
-	public Result newAssetForm() {
-		return ok();
-//		return ok(views.html.form.render());
-	}
-	
 	@Transactional
 	public Result viewAsset(Long assetId) {
 		Asset asset = JPA.em().find(Asset.class, assetId);
 		
 		return ok(views.html.viewAsset.render(asset));
+	}
+	
+	@Transactional
+	public Result viewCustomer(Long customerId) {
+		Customer customer= JPA.em().find(Customer.class, customerId);
+		return ok(views.html.viewCustomer.render(customer));
 	}
 	
 	@Transactional
@@ -51,6 +52,17 @@ public class Application extends Controller {
 	
 	public Result newAssetForm(){
 		
+		return ok(views.html.newAssetForm.render(null));
+	}
+	
+	public Result newCustomerForm() {
+		return ok(views.html.customerForm.render(null));
+	}
+	
+	@Transactional
+	public Result editCustomerForm(Long customerId) {
+		Customer customer = JPA.em().find(Customer.class, customerId);
+		return ok(views.html.customerForm.render(customer));
 	}
 
 }

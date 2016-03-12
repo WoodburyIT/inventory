@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Map.Entry;
 
 import datadefinitions.AssetType;
+import datadefinitions.CustomerType;
 import persistence.Asset;
 import persistence.Customer;
 import play.data.DynamicForm;
@@ -19,53 +20,48 @@ public class EditData extends Controller{
 	
 	
 	@Transactional
-	public Result editCustomer(Long customerId) throws ParseException{
+	public  Result editCustomer(Long customerId) throws ParseException{
+		System.out.println("editing customer : " + customerId);
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String firstName = requestData.get("firstName");
 		String lastName = requestData.get("lastName");
 		String email = requestData.get("email");
 		String phone = requestData.get("phone");
 		String notes = requestData.get("notes");
+		String uvid = requestData.get("uvid");
+		String customerTypeString = requestData.get("customerType");
+		
+		System.out.println("firstName : " + firstName);
+		System.out.println("lastName : " + lastName);
+		System.out.println("email : " + email);
+		System.out.println("phone : " + phone);
+		System.out.println("notes : " + notes);
+		System.out.println("uvid : " + uvid);
+		System.out.println("customerType : " + customerTypeString);
+		
 		
 		Customer customer;
-		if(customerId ==0){
+		if(customerId == null || customerId ==0){
 			customer = new Customer();
 		}
 		else{
 			customer = JPA.em().find(Customer.class, customerId);
 		}
 		
+		CustomerType customerType = CustomerType.valueOf(customerTypeString);
+		
 		customer.setFirstName(firstName);
 		customer.setLastName(lastName);
 		customer.setEmail(email);
 		customer.setPhone(phone);
 		customer.setNotes(notes);
+		customer.setUvid(uvid);
+		customer.setCustomerType(customerType);
+		
 		
 		customer = JPA.em().merge(customer);
-		
-		return ok();
-	}
-	
-	@Transactional
-	public Result newCustomer() throws ParseException{
-		DynamicForm requestData = Form.form().bindFromRequest();
-		String firstName = requestData.get("firstName");
-		String lastName = requestData.get("lastName");
-		String email = requestData.get("email");
-		String phone = requestData.get("phone");
-		String notes = requestData.get("notes");
-		
-		Customer customer = new Customer();
-		
-		customer.setFirstName(firstName);
-		customer.setLastName(lastName);
-		customer.setEmail(email);
-		customer.setPhone(phone);
-		customer.setNotes(notes);
-		
-		JPA.em().persist(customer);
-		
-		return ok();
+		System.out.println("great success !");
+		return redirect("/customer?customerId=" + customer.getCustomerId());
 	}
 	
 	@Transactional
@@ -81,17 +77,15 @@ public class EditData extends Controller{
 		String description = requestData.get("description");
 		String purchaseDateString = requestData.get("purchaseDate");
 		String priorityLevelString = requestData.get("priorityLevel");
-		String assetTypeString = requestData.get("assetType");
+		String assetType = requestData.get("assetType");
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 		Date purchaseDate = formatter.parse(purchaseDateString);
 		
 		Integer priorityLevel = Integer.parseInt(priorityLevelString);
 		
-		AssetType assetType = AssetType.valueOf(assetTypeString);
-		
 		Asset asset;
-		if(assetId == 0){
+		if(assetId == null || assetId == 0){
 			asset = new Asset();
 		}
 		else{

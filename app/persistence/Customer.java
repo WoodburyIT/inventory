@@ -74,6 +74,22 @@ public class Customer {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+
+	public CustomerType getCustomerType() {
+		return customerType;
+	}
+
+	public void setCustomerType(CustomerType customerType) {
+		this.customerType = customerType;
+	}
+
+	public String getUvid() {
+		return uvid;
+	}
+
+	public void setUvid(String uvid) {
+		this.uvid = uvid;
+	}
 	
 	
 }

@@ -23,7 +23,7 @@ public class Asset implements Comparable<Asset>{
 	private Date purchaseDate;			
 	private Integer priorityLevel;		// Ranged 1-10
 	
-	private AssetType assetType;
+	private String assetType;
 	
 	private Date dateLost;
 
@@ -51,11 +51,11 @@ public class Asset implements Comparable<Asset>{
 		this.description = description;
 	}
 
-	public AssetType getAssetType() {
+	public String getAssetType() {
 		return assetType;
 	}
 
-	public void setAssetType(AssetType assetType) {
+	public void setAssetType(String assetType) {
 		this.assetType = assetType;
 	}
 
