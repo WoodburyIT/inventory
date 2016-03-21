@@ -20,7 +20,7 @@ public class EditData extends Controller{
 	
 	
 	@Transactional
-	public  Result editCustomer(Long customerId) throws ParseException{
+	public  Result editCustomer(Long customerId) throws ParseException{ 
 		System.out.println("editing customer : " + customerId);
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String firstName = requestData.get("firstName");
@@ -79,9 +79,10 @@ public class EditData extends Controller{
 		String priorityLevelString = requestData.get("priorityLevel");
 		String assetType = requestData.get("assetType");
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date purchaseDate = formatter.parse(purchaseDateString);
 		
+		System.out.println("purchaseDate : " + purchaseDate);
 		Integer priorityLevel = Integer.parseInt(priorityLevelString);
 		
 		Asset asset;
