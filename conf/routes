@@ -28,9 +28,12 @@ GET		/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset
 GET		/newAsset				controllers.Application.newAssetForm()
 GET		/newCustomer			controllers.Application.newCustomerForm()
 GET		/editCustomer			controllers.Application.editCustomerForm(customerId : Long)
+GET		/editAsset				controllers.Application.editAssetForm(assetId : Long)
 
 GET 	/asset					controllers.Application.viewAsset(assetId : Long) 
 GET		/customer				controllers.Application.viewCustomer(customerId : Long)
+
+GET		/assets					controllers.Application.viewAssets()
 
 # Home page
 GET     /                           controllers.Application.index()

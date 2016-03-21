@@ -1,8 +1,9 @@
 @import _root_.datadefinitions.CustomerType
-@import java.lang.String; var firstName = ""; var lastName = ""; var email = ""; var phone = ""; var customerType = ""; var uvid = ""; var notes = "";
+@import java.lang.String; var firstName = ""; var lastName = ""; var email = ""; var phone = ""; var customerType = ""; var uvid = ""; var notes = ""; var customerId="0";
 @(customer : _root_.persistence.Customer = null)
 @{
 	if(customer != null){
+		customerId = customer.getCustomerId() + "";
 		firstName = customer.getFirstName();
 		lastName = customer.getLastName();
 		email = customer.getEmail();
@@ -24,7 +25,8 @@
 	<img id="top" src="assets/images/top.png" alt="">
 	<div id="form_container">
 		<h1><a>Create Customer Entry</a></h1>
-		<form id="form_1101196" name="createCustomerCreationForm" class="appnitro"  method="post" action="/api/customer">
+		
+		<form id="form_1101196" name="createCustomerCreationForm" class="appnitro"  method="post" action="/api/customer/@customerId">
 			<div class="form_description">
 				<h2>Create Customer Entry</h2>
 				<p>This page is for entering in new customers whose data is not in the database.</p>

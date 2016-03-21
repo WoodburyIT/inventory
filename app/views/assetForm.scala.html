@@ -1,5 +1,19 @@
-@(asset : _root_.persistence.Asset)
+@import _root_.datadefinitions.AssetType
+@import java.lang.String; var name = ""; var inventoryNumber = ""; var description = ""; var purchaseDate = ""; var priorityLevel = ""; var assetType = ""; var dateLost = ""; var assetId="0";
 
+@(asset : _root_.persistence.Asset)
+@{
+	if(asset != null){
+		assetId = asset.getAssetId() + "";
+		name = asset.getName();
+		inventoryNumber = asset.getInventoryNumber();
+		description = asset.getDescription();
+		purchaseDate = asset.getPurchaseDate() + "";
+		priorityLevel = asset.getPriorityLevel() + "";
+		assetType = asset.getAssetType();
+		dateLost = asset.getDateLost() + "";
+	}
+}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,7 +22,17 @@
 <link rel="stylesheet" type="text/css" href="assets/stylesheets/view.css" media="all">
 <script type="text/javascript" src="assets/javascripts/view.js"></script>
 <script type="text/javascript" src="assets/javascripts/calendar.js"></script>
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="assets/javascripts/jquery.simple-dtpicker.js"></script>
+<link type="text/css" href="assets/stylesheets/jquery.simple-dtpicker.css" rel="stylesheet" />
+<script type="text/javascript">
+			$(function(){
+				$('*[name=purchaseDate]').appendDtpicker({
+					"inline": true,
+					"current": "current"
+				});
+			});
+		</script>
   <script type="text/javascript">
       var ck_nameType = /^[A-Za-z0-9 \-]{1,50}$/;
       var ck_number = /^[A-Za-z0-9 \-]{0,25}$/;
@@ -103,54 +127,34 @@
 					<li id="li_createassname" >
 		<label class="description" for="name">* Asset Name </label>
 		<div>
-			@if(asset == null){
-			} else {
-			}
-			@if(asset == null){
-			} else {
-			}
-			<input id="name" name="name" class="element text large" type="text" maxlength="50" value="@asset.getName()"/> 
+			<input id="name" name="name" class="element text large" type="text" maxlength="50" value="@name"/> 
 		</div><p class="guidelines" id="guide_createassname"><small>Please follow the naming convention; Manufacturer, Model, Type, Asset Number. (ex. Dell Latitude Laptop 01, Epson Projector 01, Kensington Presentation Pointer 01, etc.)</small></p> 
 		</li>		<li id="li_createasstype" >
 		<label class="description" for="assetType">* Asset Type </label>
 		<div>
-			<input id="assetType" name="assetType" class="element text medium" type="text" maxlength="25" value="@asset.getAssetType()"/> 
+			<input id="assetType" name="assetType" class="element text medium" type="text" maxlength="25" value="@assetType"/> 
 		</div><p class="guidelines" id="guide_createasstype"><small>Such as; Laptop, Projector, Clicker, Video Cable, Cable Adapter etc.</small></p> 
 		</li>		<li id="li_createinvnumb" >
 		<label class="description" for="inventoryNumber">Inventory Number </label>
 		<div>
-			<input id="inventoryNumber" name="inventoryNumber" class="element text small" type="text" maxlength="15" value="@asset.getInventoryNumber()"/> 
+			<input id="inventoryNumber" name="inventoryNumber" class="element text small" type="text" maxlength="15" value="@inventoryNumber"/> 
 		</div><p class="guidelines" id="guide_createinvnumb"><small>UVU Inventory Number. This is only needed for assets with inventory stickers.</small></p> 
 		</li>		<li id="li_3" >
 		<label class="description" for="purchaseDate">Purchase Date </label>
-		<span>
-			<input id="element_3_1" name="element_3_1" class="element text" size="2" maxlength="2" value="" type="text"> /
-			<label for="element_3_1">MM</label>
-		</span>
-		<span>
-			<input id="element_3_2" name="element_3_2" class="element text" size="2" maxlength="2" value="" type="text"> /
-			<label for="element_3_2">DD</label>
-		</span>
-		<span>
-	 		<input id="element_3_3" name="element_3_3" class="element text" size="4" maxlength="4" value="" type="text">
-			<label for="element_3_3">YYYY</label>
-		</span>
+		<input type="text" name="purchaseDate" value="">
 		<p class="guidelines" id="guide_createpurchasedate"><small>This is only needed for assets with inventory stickers.</small></p> 
 		</li>		<li id="li_createprioritylvl" >
 		<label class="description" for="priorityLevel">* Priority Level </label>
 		<div>
-		<select class="element select small" id="priorityLevel" name="priorityLevel" required> 
-			<option value="" selected="selected"></option>
-<option value="1_createprioritylvl" >1</option>
-<option value="2_createprioritylvl" >2</option>
-<option value="3_createprioritylvl" >3</option>
-<option value="4_createprioritylvl" >4</option>
-<option value="5_createprioritylvl" >5</option>
-<option value="6_createprioritylvl" >6</option>
-<option value="7_createprioritylvl" >7</option>
-<option value="8_createprioritylvl" >8</option>
-<option value="9_createprioritylvl" >9</option>
-<option value="10_createprioritylvl" >10</option>
+		<select class="element select small" id="priorityLevel" name="priorityLevel" required>
+		 	<option value=""></option>
+			@for(i <- 1 to 10){
+				@if(priorityLevel == i){
+					<option value="@i" selected ="selected">@i</option>
+				}else {
+					<option value="@i">@i</option>
+				}
+			}
 
 		</select>
 		</div><p class="guidelines" id="guide_createprioritylvl"><small>This will determine the order in which the asset appears on the checkout calendar.</small></p> 

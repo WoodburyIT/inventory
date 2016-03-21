@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Calendar;
+import java.util.List;
 
 import datadefinitions.AssetType;
 import persistence.Asset;
@@ -17,18 +18,10 @@ public class Application extends Controller {
 
 	@Transactional
     public Result index() {
-		System.out.println("in index");
-		Asset asset = new Asset();
-		
-		Customer customer = new Customer();
-		customer.setFirstName("John"); 
-		customer.setLastName("Jones");
-		customer.setEmail("JohnJonesTesting@gmail.com");
-		customer.setPhone("801-995-9999");
-		customer.setNotes("John has a habit of returning things late -- Michael");
-		JPA.em().persist(customer);
         return ok(views.html.index.render("Your new application is ready.")); 
     }
+	
+	
 	
 	@Transactional
 	public Result viewAsset(Long assetId) {
@@ -38,21 +31,27 @@ public class Application extends Controller {
 	}
 	
 	@Transactional
+	public Result viewAssets(){
+		List<Asset> assets = JPA.em().createQuery("from Asset a", Asset.class).getResultList();
+		
+		return ok(views.html.tempAssetList.render());
+	}
+	
+	@Transactional
 	public Result viewCustomer(Long customerId) {
 		Customer customer= JPA.em().find(Customer.class, customerId);
 		return ok(views.html.viewCustomer.render(customer));
 	}
 	
 	@Transactional
-	public Result editAsset(Long assetId) {
+	public Result editAssetForm(Long assetId) {
 		Asset asset = JPA.em().find(Asset.class, assetId);
 		
-		return ok(views.html.viewAsset.render(asset));
+		return ok(views.html.assetForm.render(asset));
 	}
 	
 	public Result newAssetForm(){
-		
-		return ok(views.html.newAssetForm.render(null));
+		return ok(views.html.assetForm.render(null));
 	}
 	
 	public Result newCustomerForm() {
