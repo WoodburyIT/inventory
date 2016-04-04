@@ -3,7 +3,10 @@ package controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import datadefinitions.AssetType;
 import datadefinitions.CustomerType;
@@ -13,11 +16,48 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.InvUtil;
+import util.SessionHandler;
 
 public class EditData extends Controller{
 	
+	public Result addAssetToCart(Long assetId) {
+		System.out.println("assetId : " + assetId);
+		Set<Long> ids = SessionHandler.setFromCookie(session().get("assetsInCart"));
+		ids.add(assetId);
+		System.out.println("ids : " + ids);
+		session().put("assetsInCart", SessionHandler.toCookie(ids));
+		return status(204);
+	}
+	
+	public Result assignCustomerToCart(Long customerId) {
+		System.out.println("customerId : " + customerId);
+		session().put("customerInCart", SessionHandler.toCookie(customerId));
+		System.out.println("session: " + session());
+		return status(204);
+	}
+	
+	public Result removeAssetFromCart(Long assetId) {
+		Set<Long> ids = SessionHandler.setFromCookie(session().get("assetsInCart"));
+		ids.remove(assetId);
+		session().put("assetsInCart", SessionHandler.toCookie(ids));
+		System.out.println("ids : " + ids);
+		return ok();
+	}
+	
+	public Result removeCutomerFromCart() {
+		session().remove("customerInCart");
+		return ok();
+	}
+	
+	public Result clearCart() {
+		session().remove("assetsInCart");
+		session().remove("customerInCart");
+		return ok();
+	}
 	
 	@Transactional
 	public  Result editCustomer(Long customerId) throws ParseException{ 
@@ -78,11 +118,21 @@ public class EditData extends Controller{
 		String purchaseDateString = requestData.get("purchaseDate");
 		String priorityLevelString = requestData.get("priorityLevel");
 		String assetType = requestData.get("assetType");
+		String dateLostString = requestData.get("dateLost");
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Date purchaseDate = formatter.parse(purchaseDateString);
+		Date purchaseDate = null;
+		Date dateLost = null;
+		if(purchaseDateString != null){
+			purchaseDate = InvUtil.getDateFormat().parse(purchaseDateString);
+			System.out.println("purchaseDate : " + purchaseDate);
+		}
+		if(dateLostString != null){
+			dateLost = InvUtil.getDateFormat().parse(dateLostString);
+			System.out.println("dateLost : " + dateLost);
+		}
 		
-		System.out.println("purchaseDate : " + purchaseDate);
+		
+		
 		Integer priorityLevel = Integer.parseInt(priorityLevelString);
 		
 		Asset asset;
@@ -97,12 +147,13 @@ public class EditData extends Controller{
 		asset.setName(name);
 		asset.setDescription(description);
 		asset.setPurchaseDate(purchaseDate);
+		asset.setDateLost(dateLost);
 		asset.setPriorityLevel(priorityLevel);
 		asset.setAssetType(assetType);
 		
 		asset = JPA.em().merge(asset);
 		
-		return ok(views.html.viewAsset.render(asset));
+		return redirect("/asset?assetId=" + asset.getAssetId());
 	}
 	
 	@Transactional

@@ -1,5 +1,6 @@
 body{
 	background-color: gray;
+	overflow-x:
 }
 
 a{
@@ -34,6 +35,9 @@ h5{
 	padding: 5px 0px 0px 0px;
 } 
 
+button{
+	color:red;
+}	
 #links-header{
 	background-color: black;
 	padding: 1px 0px 1px 0px

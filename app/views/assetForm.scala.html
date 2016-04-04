@@ -1,5 +1,6 @@
 @import _root_.datadefinitions.AssetType
-@import java.lang.String; var name = ""; var inventoryNumber = ""; var description = ""; var purchaseDate = ""; var priorityLevel = ""; var assetType = ""; var dateLost = ""; var assetId="0";
+@import _root_.util.InvUtil
+@import java.lang.String; var name = ""; var inventoryNumber = ""; var description = ""; var purchaseDate = ""; var priorityLevel = ""; var assetType = ""; var dateLost = ""; var assetId="0"; var reservable = "";
 
 @(asset : _root_.persistence.Asset)
 @{
@@ -8,110 +9,19 @@
 		name = asset.getName();
 		inventoryNumber = asset.getInventoryNumber();
 		description = asset.getDescription();
-		purchaseDate = asset.getPurchaseDate() + "";
 		priorityLevel = asset.getPriorityLevel() + "";
 		assetType = asset.getAssetType();
-		dateLost = asset.getDateLost() + "";
+		reservable = String.valueOf(asset.isReservable());
+		
+		if(asset.getDateLost() != null){
+			dateLost = InvUtil.getDateFormat().format(asset.getDateLost());
+		}
+		if(asset.getPurchaseDate() != null) {
+			purchaseDate = InvUtil.getDateFormat().format(asset.getPurchaseDate());
+		}
 	}
 }
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Create Checkout Asset</title>
-<script type="text/javascript" src="assets/javascripts/view.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/stylesheets/view.css" media="all">
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="assets/javascripts/jquery.simple-dtpicker.js"></script>
-<link type="text/css" href="assets/stylesheets/jquery.simple-dtpicker.css" rel="stylesheet" />
-<script type="text/javascript">
-			$(function(){
-				$('#purchaseDate').appendDtpicker({
-					"inline": false,
-					"closeOnSelected": true,
-					"autodateOnStart": false
-				});
-				$('#lostDate').appendDtpicker({
-					"inline": false,
-					"closeOnSelected": true,
-					"autodateOnStart": false
-				});
-			});
-		</script>
-  <script type="text/javascript">
-      var ck_nameType = /^[A-Za-z0-9 \-]{1,50}$/;
-      var ck_number = /^[A-Za-z0-9 \-]{0,25}$/;
-      var ck_MM = /^(0?[1-9]|1[012]|)$/;
-      var ck_DD = /^(0[1-9]|[12]\d|3[01]|)$/;
-      var ck_YYYY = /^[0-9]{0,4}|$/;
-
-      function validate()
-      {
-      
-        if( document.createCheckoutAssetForm.name.value == "" )
-         {
-            alert( "Asset Name required!" );
-            document.createCheckoutAssetForm.name.focus() ;
-            return false;
-         }
-        
-         if (!ck_nameType.test(document.createCheckoutAssetForm.name.value))
-         {
-            alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
-            document.createCheckoutAssetForm.name.focus() ;
-            return false;
-         }
-        
-         if( document.createCheckoutAssetForm.assetType.value == "" )
-         {
-            alert( "Asset Type required!" );
-            document.createCheckoutAssetForm.assetType.focus() ;
-            return false;
-         }
-        
-        if (!ck_nameType.test(document.createCheckoutAssetForm.assetType.value))
-         {
-            alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
-            document.createCheckoutAssetForm.assetType.focus() ;
-            return false;
-         }
-        
-        if (!ck_number.test(document.createCheckoutAssetForm.inventoryNumber.value))
-         {
-            alert( "Invalid Characters Detected! Allowed characters include letters, numbers, spaces, and hyphens." );
-            document.createCheckoutAssetForm.inventoryNumber.focus() ;
-            return false;
-         }
-        
-        if (!ck_MM.test(document.createCheckoutAssetForm.element_3_1.value))
-         {
-            alert( "Enter a valid month." );
-            document.createCheckoutAssetForm.element_3_1.focus() ;
-            return false;
-         }
-        
-        if (!ck_DD.test(document.createCheckoutAssetForm.element_3_2.value))
-         {
-            alert( "Enter a valid day." );
-            document.createCheckoutAssetForm.element_3_2.focus() ;
-            return false;
-         }
-        
-        if (!ck_YYYY.test(document.createCheckoutAssetForm.element_3_3.value))
-         {
-            alert( "Enter a valid year" );
-            document.createCheckoutAssetForm.element_3_3.focus() ;
-            return false;
-         }
-		 
-                 
-         return( true );
-      }
-</script>   
-
-</head>
-<body id="main_body" >
-	
+@frame("Asset Form"){	
 	<img id="top" src="assets/images/top.png" alt="">
 	<div id="form_container">
 	
@@ -155,8 +65,8 @@
 		<select class="element select small" id="priorityLevel" name="priorityLevel" required>
 		 	<option value=""></option>
 			@for(i <- 1 to 10){
-				@if(priorityLevel == i){
-					<option value="@i" selected ="selected">@i</option>
+				@if(priorityLevel == String.valueOf(i)){
+					<option value="@i" selected="selected">@i</option>
 				}else {
 					<option value="@i">@i</option>
 				}
@@ -170,17 +80,28 @@
 			<textarea id="description" name="description" class="element textarea medium" maxlength="255"></textarea> 
 		</div><p class="guidelines" id="guide_createassdescription"><small>Use this field for anything you want to write about the asset.</small></p> 
 		</li>		<li id="li_createreserveable" >
-		<label class="description" for="highProfile">* Should this item be available for reserved checkout? </label>
+		<label class="description" for="reservable">* Should this item be available for reserved checkout? </label>
 		<div>
-		<select class="element select small" id="highProfile" name="highProfile" required> 
-			<option value="" selected="selected"></option>
-<option value="yes_createreserveable" >Yes</option>
-<option value="no_createreserveable" >No</option>
-
+		<select class="element select small" id="reservable" name="reservable" required>
+			@if(reservable == null || reservable == ""){
+				<option value="" selected="selected"></option>
+				<option value="true" >Yes</option>
+				<option value="false" >No</option>
+			} else{
+				@if(reservable == false){
+					<option value=""></option>
+					<option value="true" >Yes</option>
+					<option value="false"  selected="selected">No</option>
+				}else{
+					<option value=""></option>
+					<option value="true"  selected="selected">Yes</option>
+					<option value="false" >No</option>
+				}
+			}
 		</select>
 		</div><p class="guidelines" id="guide_createreserveable"><small>This determines if an item can be reserved for future checkout. Otherwise it is assumed to be available. Examples of reserve-able; Laptops, Projectors, Clickers, Cable Adapters. Examples of trivial non-reserve-able items: Power adapters, VGA Cables, Mice, Keyboards.</small></p>
-		<label class="description" for="lostDate">Lost Date</label>
-		<input type="text" name="lostDate" value="@dateLost" id="lostDate"> 
+		<label class="description" for="dateLost">Date Lost</label>
+		<input type="text" name="dateLost" value="@dateLost" id="dateLost"> 
 		</li>
 			
 					<li class="buttons">
@@ -193,5 +114,4 @@
 
 	</div>
 	<img id="bottom" src="assets/images/bottom.png" alt="">
-	</body>
-</html>
+}

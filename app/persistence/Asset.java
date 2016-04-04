@@ -24,6 +24,8 @@ public class Asset implements Comparable<Asset>{
 	private Integer priorityLevel;		// Ranged 1-10
 	
 	private String assetType;
+	private Boolean reservable;
+	
 	
 	private Date dateLost;
 
@@ -89,6 +91,14 @@ public class Asset implements Comparable<Asset>{
 
 	public void setDateLost(Date dateLost) {
 		this.dateLost = dateLost;
+	}
+
+	public Boolean isReservable() {
+		return reservable;
+	}
+
+	public void setReservable(Boolean reservable) {
+		this.reservable = reservable;
 	}
 
 	@Override

@@ -21,7 +21,9 @@ public class CheckoutLineItem {
 	@ManyToOne
 	private Asset asset;
 	
+	private Date dueDate;
 	private Date dateCheckedIn;
+	
 	public long getCheckoutLineItemId() {
 		return checkoutLineItemId;
 	}
@@ -46,6 +48,13 @@ public class CheckoutLineItem {
 	public void setDateCheckedIn(Date dateCheckedIn) {
 		this.dateCheckedIn = dateCheckedIn;
 	}
+	public Date getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
 	
 	
 }

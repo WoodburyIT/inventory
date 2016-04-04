@@ -1,10 +1,42 @@
 @(asset : _root_.persistence.Asset)
 
-<div class="view-entity">
-	<h3>@asset.getName() (@asset.getAssetId())</h3>
-	<p>@asset.getInventoryNumber()</p>
-	<p>@asset.getAssetType()</p>
-	<p>@asset.getPriorityLevel()</p>
-	<p>@asset.getPurchaseDate()</p>
-	<p>@asset.getDescription</p>
-</div>
+@frame("View Asset"){
+	<div class="view-entity asset-info">
+		<h3>@asset.getName() (@asset.getAssetId())</h3>
+		<table>
+			<tr>
+				<td>Asset ID</td>
+				<td><span class="assetId">@asset.getAssetId()</span></td>
+			</tr>
+			<tr>
+				<td>Inventory Number</td>
+				<td>@asset.getInventoryNumber()</td>
+			</tr>
+			<tr>
+				<td>Asset Type</td>
+				<td>@asset.getAssetType()</td>
+			</tr>
+			<tr>
+				<td>Priority Level</td>
+				<td>@asset.getPriorityLevel()</td>
+			</tr>
+			<tr>
+				<td>Purchase Date</td>
+				<td>@asset.getPurchaseDate()</td>
+			</tr>
+			<tr>
+				<td>Date Lost</td>
+				<td>@asset.getDateLost()</td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td>@asset.getDescription()</td>
+			</tr>
+		</table>
+		<a href="/editAsset?assetId=@asset.getAssetId()">Edit &raquo;</a>
+		<button type="button" class="asset-to-cart">Add To Cart</button>
+		<button type="button" class="asset-from-cart">Remove From Cart</button>
+	</div>
+	
+	
+}

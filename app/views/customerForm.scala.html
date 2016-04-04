@@ -8,20 +8,12 @@
 		lastName = customer.getLastName();
 		email = customer.getEmail();
 		phone = customer.getPhone();
-		customerType = customer.getCustomerType.name();
+		customerType = customer.getCustomerType + "";
 		uvid = customer.getUvid();
 		notes = customer.getNotes();
 	}
 }
-<!DOCTYPE html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Create Customer Entry</title>
-	<link rel="stylesheet" type="text/css" href="assets/stylesheets/view.css" media="all">
-	<script type="text/javascript" src="assets/javascripts/view.js"></script>
-	<script type="text/javascript" src="assets/javascripts/calendar.js"></script>
-</head>
-<body id="main_body" >
+@frame("Customer Form"){
 	<img id="top" src="assets/images/top.png" alt="">
 	<div id="form_container">
 		<h1><a>Create Customer Entry</a></h1>
@@ -100,5 +92,4 @@
 		</form>
 	</div>
 	<img id="bottom" src="assets/images/bottom.png" alt="">
-</body>
-</html>
+}

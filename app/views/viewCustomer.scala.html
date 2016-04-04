@@ -1,12 +1,18 @@
 @(customer : _root_.persistence.Customer)
-
-
-@customer.getFirstName()
-@customer.getLastName()
-@customer.getCustomerType()
-@customer.getEmail()
-@customer.getPhone()
-@customer.getUvid()
-@customer.getNotes()
-
-<a href="/editCustomer?customerId=@customer.getCustomerId()">Edit &raquo;</a>
+	
+@frame("View Customer"){
+	<div class="customer-info">
+		<span class="customerId">@customer.getCustomerId()</span>
+		@customer.getFirstName()
+		@customer.getLastName()
+		@customer.getCustomerType()
+		@customer.getEmail()
+		@customer.getPhone()
+		@customer.getUvid()
+		@customer.getNotes()
+	
+		<a href="/editCustomer?customerId=@customer.getCustomerId()">Edit &raquo;</a>
+		<button type="button" class="customer-to-cart">Assign To Cart</button>
+		<button type="button" class="customer-from-cart">Remove From Cart</button>
+	</div>
+}

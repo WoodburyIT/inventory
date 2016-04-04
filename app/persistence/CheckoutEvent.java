@@ -77,7 +77,16 @@ public class CheckoutEvent {
 
 	public void setLineItems(List<CheckoutLineItem> lineItems) {
 		this.lineItems.clear();
-		this.lineItems.addAll(lineItems);
+		for(CheckoutLineItem lineItem : lineItems){
+			this.lineItems.add(lineItem);
+		}
+	}
+	
+	public void addLineItem(CheckoutLineItem lineItem){
+		if(!this.lineItems.contains(lineItem)){
+			this.lineItems.add(lineItem);
+			lineItem.setDueDate(this.dueDate);
+		}
 	}
 	
 	

@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.apache.commons.lang3.StringUtils;
+
 import datadefinitions.CustomerType;
 
 @Entity
@@ -72,7 +74,7 @@ public class Customer {
 	}
 
 	public void setNotes(String notes) {
-		this.notes = notes;
+		this.notes = StringUtils.abbreviate(notes, 4000);
 	}
 
 	public CustomerType getCustomerType() {

@@ -15,6 +15,11 @@ POST	/api/customer/:id				controllers.EditData.editCustomer(id:Long)
 POST	/api/customer					controllers.EditData.editCustomer(id : Long = 0)
 DELETE	/api/customer/:id				controllers.EditData.deleteCustomer(id : Long)
 
+GET		/addAssetToCart					controllers.EditData.addAssetToCart(assetId: Long)
+GET		/assignCustomerToCart			controllers.EditData.assignCustomerToCart(customerId:Long)
+GET		/removeAssetFromCart			controllers.EditData.removeAssetFromCart(assetId : Long)
+GET		/removeCustomerFromCart			controllers.EditData.removeCutomerFromCart()
+
 #GET		/checkout/:id				controllers.ViewData.viewCheckout(id : Long)
 #POST	/checkout/:id				controllers.EditData.editCheckout(id:Long)
 #POST	/checkout					controllers.EditData.newCheckout()
@@ -34,6 +39,8 @@ GET 	/asset					controllers.Application.viewAsset(assetId : Long)
 GET		/customer				controllers.Application.viewCustomer(customerId : Long)
 
 GET		/assets					controllers.Application.viewAssets()
+
+GET		/viewCart				controllers.ViewData.viewCart()
 
 # Home page
 GET     /                           controllers.Application.index()

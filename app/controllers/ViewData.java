@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 
@@ -12,9 +13,18 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.SessionHandler;
 
 public class ViewData extends Controller {
 
+	@Transactional
+	public Result viewCart() {
+		Set<Long> assetIds = SessionHandler.setFromCookie(session().get("assetsInCart"));
+		Long customerId = SessionHandler.singleFromCookie(session().get("customerInCart"));
+		System.out.println("assetIds : " + assetIds);
+		System.out.println("customerId : " + customerId);
+		return ok();
+	}
 	@Transactional
     public Result viewCustomer(long customerId) {
 		Customer customer = JPA.em().find(Customer.class, customerId);
