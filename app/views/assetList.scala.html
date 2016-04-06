@@ -1,0 +1,93 @@
+@(assets : java.util.List[_root_.persistence.Asset])
+
+@frame("Asset List"){
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    var table = $('#example').DataTable();
+	
+	$('#example tbody').on( 'click', 'td', function () {
+        $(this).toggleClass('selected');
+    } );
+ 
+    $('#button').click( function () {
+        alert( table.rows('.selected').data().length +' row(s) selected' );
+    } );
+
+} );
+
+</script>
+
+<script type="text/javascript">
+function toggle(button) {
+  if (button.value == "REMOVE") {
+    button.value = "ADD";
+  } else {
+    button.value = "REMOVE";
+  }
+}
+</script>
+<script type="text/javascript">
+function addStyle() {
+    $(this).removeClass('addButton');
+	$(this).addClass("remButton");
+};
+</script>
+	
+<h2>List of Assets</h2>
+<div id="wrapper">
+<div id="leftcolumn">
+                <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Inventory Number</th>
+                <th>Checkout Status</th>
+                <th>Cart Add/Remove</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Inventory Number</th>
+                <th>Checkout Status</th>
+                <th>Cart Add/Remove</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        	@for(asset <- assets){
+        			<tr>
+                        <td>
+                            <a href="/asset?assetId=@asset.getAssetId()">@asset.getName();</a>
+                        </td>
+                        <td>
+                            @asset.getAssetType();
+                        </td>
+                        <td>
+                            @asset.getInventoryNumber();
+                        </td>
+						<td>
+                            Available
+                        </td>
+                        <td>
+                        	<a href="#" class="addButton">Add</a>
+                        </td>
+                    </tr>
+        	}
+                   
+        </tbody>
+    </table>
+</div>
+<div id="rightcolumn">
+<img src="assets/images/cart.png" width="128" height="128" alt="shopping cart icon" title="shopping cart">
+<p>
+<a href="#" class="chkNowButton">Checkout Immediately</a>
+</p>
+<p>
+<a href="#" class="schChkButton">Schedule For Checkout</a>
+</p>
+<p>send an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as df</p>
+</div>
+</div>
+}

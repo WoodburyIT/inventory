@@ -19,6 +19,9 @@ public class CheckoutLineItem {
 	private CheckoutEvent checkoutEvent;
 	
 	@ManyToOne
+	private ScheduledCheckout scheduledCheckout;
+	
+	@ManyToOne
 	private Asset asset;
 	
 	private Date dueDate;
@@ -54,7 +57,14 @@ public class CheckoutLineItem {
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
+	public ScheduledCheckout getScheduledCheckout() {
+		return scheduledCheckout;
+	}
+	public void setScheduledCheckout(ScheduledCheckout scheduledCheckout) {
+		this.scheduledCheckout = scheduledCheckout;
+	}
 
+	
 	
 	
 }

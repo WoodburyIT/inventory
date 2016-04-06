@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@Entity
 public class ScheduledCheckout {
 
 	@Id
@@ -25,6 +28,8 @@ public class ScheduledCheckout {
 	private Customer customer;
 
 	private Date scheduledDate;
+	private Date dueDate;
+	@Column(nullable = true, columnDefinition="varchar(4000)")
 	private String notes;
 	private String assignedTo;
 	
@@ -64,6 +69,12 @@ public class ScheduledCheckout {
 	}
 	public void setAssignedTo(String assignedTo) {
 		this.assignedTo = assignedTo;
+	}
+	public Date getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
 	}
 	
 	

@@ -1,37 +1,32 @@
 $(function(){
-	$('#purchaseDate').appendDtpicker({
-		"inline": false,
-		"closeOnSelected": true,
-		"autodateOnStart": false
-	});
-	$('#dateLost').appendDtpicker({
-		"inline": false,
-		"closeOnSelected": true,
-		"autodateOnStart": false
-	});
+	var dateFields = $("#purchaseDate, #dateLost");
+	if(dateFields.size() > 0){
+		$('#dateFields').appendDtpicker({
+			"inline": false,
+			"closeOnSelected": true,
+			"autodateOnStart": false
+		});
+	}
+	
 	
 	$(".asset-to-cart").click(function() {
 		var assetId = $(this).parents(".asset-info").find(".assetId").text();
 		$.get("/addAssetToCart?assetId=" + assetId, function(data) {
-			alert("data : " + data);
 		});
 	});
 	$(".customer-to-cart").click(function() {
 		var customerId = $(this).parents(".customer-info").find(".customerId").text();
 		
 		$.get("/assignCustomerToCart?customerId=" + customerId, function(data) {
-			alert("data : " + data);
 		});
 	});
 	$(".asset-from-cart").click(function() {
 		var assetId = $(this).parents(".asset-info").find(".assetId").text();
 		$.get("/removeAssetFromCart?assetId=" + assetId, function(data) {
-			alert("data : " + data);
 		});
 	});
 	$(".customer-from-cart").click(function() {
 		$.get("/removeCustomerFromCart", function(data) {
-			alert("data : " + data);
 		});
 	});
 });

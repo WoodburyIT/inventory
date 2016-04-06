@@ -1,0 +1,48 @@
+@(customers : java.util.List[_root_.persistence.Customer])
+
+@frame("Customer List"){
+<table id="customer-list-table" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Customer Type</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Customer Type</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        	@for(customer <- customers){
+        			<tr>
+                        <td>
+                            <a href="/customer?customerId=@customer.getCustomerId()">@customer.getFirstName()</a>
+                        </td>
+                        <td>
+                            <a href="/customer?customerId=@customer.getCustomerId()">@customer.getLastName()</a>
+                        </td>
+                        <td>
+                            @customer.getCustomerType();
+                        </td>
+						<td>
+                            @customer.getEmail();
+                        </td>
+                        <td>
+                        	@customer.getPhone();
+                        </td>
+                    </tr>
+        	}
+                   
+        </tbody>
+    </table>
+
+
+}

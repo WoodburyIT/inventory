@@ -2,6 +2,7 @@ package controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,10 @@ import java.util.Set;
 import datadefinitions.AssetType;
 import datadefinitions.CustomerType;
 import persistence.Asset;
+import persistence.CheckoutEvent;
+import persistence.CheckoutLineItem;
 import persistence.Customer;
+import persistence.ScheduledCheckout;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.JPA;
@@ -56,6 +60,88 @@ public class EditData extends Controller{
 	public Result clearCart() {
 		session().remove("assetsInCart");
 		session().remove("customerInCart");
+		return ok();
+	}
+	
+	@Transactional
+	public Result checkoutCart() throws ParseException{
+		System.out.println("checking out cart");
+		DynamicForm requestData = Form.form().bindFromRequest();
+		String dueDateString = requestData.get("dueDate");
+		String checkedOutBy = requestData.get("checkedOutBy");
+		String notes = requestData.get("notes");
+		
+		Date dueDate = null;
+		if(dueDateString != null){
+			dueDate = InvUtil.getDateFormat().parse(dueDateString);
+			System.out.println("dueDate : " + dueDate);
+		}
+		
+		Set<Long> ids = SessionHandler.setFromCookie(session().get("assetsInCart"));
+		Long customerId = Long.parseLong(session().get("customerInCart"));
+		
+		Customer customer = JPA.em().find(Customer.class, customerId);
+		
+		CheckoutEvent checkoutEvent = new CheckoutEvent();
+		checkoutEvent.setCustomer(customer);
+		checkoutEvent.setCheckoutDate(Calendar.getInstance().getTime());
+		checkoutEvent.setDueDate(dueDate);
+		checkoutEvent.setCheckedOutBy(checkedOutBy);
+		checkoutEvent.setNotes(notes);
+		
+		for(Long id : ids){
+			Asset asset = JPA.em().find(Asset.class, id);
+			CheckoutLineItem lineItem = new CheckoutLineItem();
+			lineItem.setAsset(asset);
+			JPA.em().persist(lineItem);
+			checkoutEvent.addLineItem(lineItem);
+		}
+		JPA.em().persist(checkoutEvent);
+		
+		return ok();
+	}
+	
+	@Transactional
+	public Result scheduleCart() throws ParseException{
+		System.out.println("sheduling cart");
+		DynamicForm requestData = Form.form().bindFromRequest();
+		String dueDateString = requestData.get("dueDate");
+		String scheduledDateString = requestData.get("scheduledDate");
+		String assignedTo = requestData.get("assignedTo");
+		String notes = requestData.get("notes");
+		
+		Date dueDate = null;
+		Date scheduledDate = null;
+		if(dueDateString != null){
+			dueDate = InvUtil.getDateFormat().parse(dueDateString);
+			System.out.println("dueDate : " + dueDate);
+		}
+		if(scheduledDateString != null){
+			scheduledDate = InvUtil.getDateFormat().parse(scheduledDateString);
+			System.out.println("scheduleDate : " + scheduledDate);
+		}
+		
+		Set<Long> ids = SessionHandler.setFromCookie(session().get("assetsInCart"));
+		Long customerId = Long.parseLong(session().get("customerInCart"));
+		
+		Customer customer = JPA.em().find(Customer.class, customerId);
+		
+		ScheduledCheckout sched = new ScheduledCheckout();
+		sched.setCustomer(customer);
+		sched.setScheduledDate(scheduledDate);
+		sched.setDueDate(dueDate);
+		sched.setAssignedTo(assignedTo);
+		sched.setNotes(notes);
+		
+		for(Long id : ids){
+			Asset asset = JPA.em().find(Asset.class, id);
+			CheckoutLineItem lineItem = new CheckoutLineItem();
+			lineItem.setAsset(asset);
+			JPA.em().persist(lineItem);
+			sched.addLineItem(lineItem);
+		}
+		JPA.em().persist(sched);
+		
 		return ok();
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,9 @@ public class CheckoutEvent {
 	private Date dueDate;
 	
 	private String checkedOutBy;
+	
+	@Column(nullable = true, columnDefinition="varchar(4000)")
+	private String notes;
 	
 	public Customer getCustomer() {
 		return customer;
@@ -87,6 +91,14 @@ public class CheckoutEvent {
 			this.lineItems.add(lineItem);
 			lineItem.setDueDate(this.dueDate);
 		}
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	
 	

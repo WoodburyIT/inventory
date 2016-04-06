@@ -15,6 +15,8 @@ POST	/api/customer/:id				controllers.EditData.editCustomer(id:Long)
 POST	/api/customer					controllers.EditData.editCustomer(id : Long = 0)
 DELETE	/api/customer/:id				controllers.EditData.deleteCustomer(id : Long)
 
+GET		/api/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset : Integer ?= 0, priority : Integer?= 0, search : String ?= null)
+
 GET		/addAssetToCart					controllers.EditData.addAssetToCart(assetId: Long)
 GET		/assignCustomerToCart			controllers.EditData.assignCustomerToCart(customerId:Long)
 GET		/removeAssetFromCart			controllers.EditData.removeAssetFromCart(assetId : Long)
@@ -26,7 +28,7 @@ GET		/removeCustomerFromCart			controllers.EditData.removeCutomerFromCart()
 #DELETE	/checkout/:id				controllers.EditData.deleteCheckout(id : Long)
 
 GET		/asset/inventorynum/:invNum	controllers.ViewData.byInventoryNum(invNum: String)
-GET		/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset : Integer ?= 0, priority : Integer?= 0, search : String ?= null)
+
 
 
 	
@@ -39,6 +41,7 @@ GET 	/asset					controllers.Application.viewAsset(assetId : Long)
 GET		/customer				controllers.Application.viewCustomer(customerId : Long)
 
 GET		/assets					controllers.Application.viewAssets()
+GET		/customers				controllers.Application.viewCustomers()
 
 GET		/viewCart				controllers.ViewData.viewCart()
 

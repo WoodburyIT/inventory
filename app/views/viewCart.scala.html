@@ -1,0 +1,26 @@
+@(assets : java.util.List[_root_.persistence.Asset], customer : _root_.persistence.Customer)
+
+@frame("View Cart") {
+
+
+	<h3>Assets in Cart</h3>
+	<table id="assets-in-cart">
+		@for(asset <- assets){
+			<tr>
+				<td><a href="/asset?assetId=@asset.getAssetId()">@asset.getName()</a></td>
+				<td>@asset.getAssetType()</td>
+				<td><button type="button" class="remove-asset-button">Remove From Cart</button></td>
+			</tr>
+		}
+	</table>
+	
+	<h3> Customer in Cart</h3>
+	<div id="customer-in-cart">
+		<p>@customer.getFirstName() @customer.getLastName()</p>
+		<p>@customer.getCustomerType()</p>
+		<p>@customer.getUvid()</p>
+		<td><button type="button" class="remove-customer-button">Remove From Cart</button></td>
+	</div>
+
+
+}
