@@ -42,8 +42,11 @@ GET		/customer				controllers.Application.viewCustomer(customerId : Long)
 
 GET		/assets					controllers.Application.viewAssets()
 GET		/customers				controllers.Application.viewCustomers()
+GET		/checkouts				controllers.Application.viewCheckouts()
+GET		/scheduledCheckouts		controllers.Application.viewScheduledCheckouts()
+GET		/pastCheckouts			controllers.Application.viewPastCheckouts(count : Integer = 500, offset : Integer = 0)		
 
-GET		/viewCart				controllers.ViewData.viewCart()
+GET		/viewCart				controllers.EditData.viewCart()
 
 # Home page
 GET     /                           controllers.Application.index()

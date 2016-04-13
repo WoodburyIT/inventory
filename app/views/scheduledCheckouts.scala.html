@@ -1,0 +1,8 @@
+@(scheduledCheckouts : java.util.List[_root_.persistence.ScheduledCheckout])
+
+@frame("Scheduled Checkout List"){
+<div id="scheduled-checkout-list-container">
+	<h2>Scheduled Checkouts</h2>
+	@scheduledCheckoutList(scheduledCheckouts)
+</div>
+}

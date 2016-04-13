@@ -1,0 +1,8 @@
+@(checkouts : java.util.List[_root_.persistence.CheckoutEvent],scheduledCheckouts : java.util.List[_root_.persistence.ScheduledCheckout])
+
+@frame("Checkout List"){
+<div id="past-checkouts-list-container">
+	<h2>All Checkouts</h2>
+	@mixedCheckoutList(checkouts, scheduledCheckouts)
+</div>
+}

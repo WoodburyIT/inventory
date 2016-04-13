@@ -9,9 +9,6 @@ $(document).ready(function() {
         $(this).toggleClass('selected');
     } );
  
-    $('#button').click( function () {
-        alert( table.rows('.selected').data().length +' row(s) selected' );
-    } );
 
 } );
 
@@ -26,14 +23,9 @@ function toggle(button) {
   }
 }
 </script>
-<script type="text/javascript">
-function addStyle() {
-    $(this).removeClass('addButton');
-	$(this).addClass("remButton");
-};
-</script>
 	
 <h2>List of Assets</h2>
+
 <div id="wrapper">
 <div id="leftcolumn">
                 <table id="example" class="display" cellspacing="0" width="100%">
@@ -57,8 +49,10 @@ function addStyle() {
         </tfoot>
         <tbody>
         	@for(asset <- assets){
-        			<tr>
+        			<tr class="asset-info">
+        				
                         <td>
+                        	<span class="hidden assetId">@asset.getAssetId()</span>
                             <a href="/asset?assetId=@asset.getAssetId()">@asset.getName();</a>
                         </td>
                         <td>
@@ -71,7 +65,8 @@ function addStyle() {
                             Available
                         </td>
                         <td>
-                        	<a href="#" class="addButton">Add</a>
+                        	<input type="button" class="addButton add-asset-button" value="ADD">
+                        	<input type="button" class="remButton remove-asset-button" value="REMOVE">
                         </td>
                     </tr>
         	}
@@ -87,7 +82,29 @@ function addStyle() {
 <p>
 <a href="#" class="schChkButton">Schedule For Checkout</a>
 </p>
-<p>send an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as dfsend an easdf asdf asdf asdf asdv ewr eqrg dfb as df</p>
+		<table class="cart-entity">
+			<tr>
+				<td>Customer Name</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Rumple Derpskin</td>
+			</tr>
+		</table>
+		</br>
+		<table class="cart-entity">
+			<tr>
+				<td>Asset Name(s)</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Dell Latitude Laptop 05</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Epson Projector 01</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Kensington Presentation Pointer 06</td>
+			</tr>
+		</table>
 </div>
 </div>
 }

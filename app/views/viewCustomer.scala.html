@@ -1,18 +1,43 @@
 @(customer : _root_.persistence.Customer)
 	
 @frame("View Customer"){
+
 	<div class="customer-info">
-		<span class="customerId">@customer.getCustomerId()</span>
-		@customer.getFirstName()
-		@customer.getLastName()
-		@customer.getCustomerType()
-		@customer.getEmail()
-		@customer.getPhone()
-		@customer.getUvid()
-		@customer.getNotes()
-	
-		<a href="/editCustomer?customerId=@customer.getCustomerId()">Edit &raquo;</a>
-		<button type="button" class="customer-to-cart">Assign To Cart</button>
-		<button type="button" class="customer-from-cart">Remove From Cart</button>
+		<h3>@customer.getFirstName() &nbsp; @customer.getLastName() &nbsp; (@customer.getCustomerId())</h3>
+		<table class="view-entity">
+			<tr>
+				<td>Customer ID</td>
+				<td><span class="customerId">@customer.getCustomerId()</span>
+			</tr>
+			<tr>
+				<td>First Name</td>
+				<td>@customer.getFirstName()</td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td>@customer.getLastName()</td>
+			</tr>
+			<tr>
+				<td>Type</td>
+				<td>@customer.getCustomerType()</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>@customer.getEmail()</td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td>@customer.getPhone()</td>
+			</tr>
+			<tr>
+				<td>UVID</td>
+				<td>@customer.getUvid()</td>
+			</tr>
+			<tr>
+				<td>Notes</td>
+				<td>@customer.getNotes()</td>
+			</tr>
+		</table>
+		</br><a href="/editCustomer?customerId=@customer.getCustomerId()" class="editButton">Edit Info &raquo;</a>
 	</div>
-}
+} 

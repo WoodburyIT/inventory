@@ -1,7 +1,34 @@
 @(customers : java.util.List[_root_.persistence.Customer])
 
 @frame("Customer List"){
-<table id="customer-list-table" cellspacing="0" width="100%">
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    var table = $('#example').DataTable();
+	
+	$('#example tbody').on( 'click', 'td', function () {
+        $(this).toggleClass('selected');
+    } );
+ 
+    $('#button').click( function () {
+        alert( table.rows('.selected').data().length +' row(s) selected' );
+    } );
+
+} );
+
+</script>
+<script type="text/javascript">
+function toggle(button) {
+  if (button.value == "REMOVE") {
+    button.value = "ADD";
+  } else {
+    button.value = "REMOVE";
+  }
+}
+</script>
+<h2>List of Customers</h2>
+<div id="wrapper">
+<div id="leftcolumn">
+<table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>First Name</th>
@@ -9,6 +36,7 @@
                 <th>Customer Type</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+				<th>Cart Add/Remove</th>
             </tr>
         </thead>
         <tfoot>
@@ -18,6 +46,7 @@
                 <th>Customer Type</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+				<th>Cart Add/Remove</th>
             </tr>
         </tfoot>
         <tbody>
@@ -38,11 +67,47 @@
                         <td>
                         	@customer.getPhone();
                         </td>
+						<td>
+                        	<input type="button" class="addButton" value="ADD" 
+							onclick="toggle(this)">
+                        </td>
                     </tr>
         	}
                    
         </tbody>
     </table>
-
-
+</div>
+<div id="rightcolumn">
+<img src="assets/images/cart.png" width="128" height="128" alt="shopping cart icon" title="shopping cart">
+<p>
+<a href="#" class="chkNowButton">Checkout Immediately</a>
+</p>
+<p>
+<a href="#" class="schChkButton">Schedule For Checkout</a>
+</p>
+		<table class="cart-entity">
+			<tr>
+				<td>Customer Name</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Rumple Derpskin</td>
+			</tr>
+		</table>
+		</br>
+		<table class="cart-entity">
+			<tr>
+				<td>Asset Name(s)</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Dell Latitude Laptop 05</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Epson Projector 01</td>
+			</tr>
+			<tr>
+				<td><a href="#" class="xButton">X</a>&nbsp;Kensington Presentation Pointer 06</td>
+			</tr>
+		</table>
+</div>
+</div>
 }

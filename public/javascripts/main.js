@@ -29,6 +29,36 @@ $(function(){
 		$.get("/removeCustomerFromCart", function(data) {
 		});
 	});
+	
+	//********************** From checkout list
+	
+	$('#overdue-checkouts-table').DataTable();
+	$('#midtable').DataTable();
+	$('#bottable').DataTable();
+	
+	$(".selectable-table").each(function() {
+		$(this).DataTable();
+	})
+	
+	$('.selectable-table tbody').on( 'click', 'td', function () {
+        $(this).toggleClass('selected');
+    } );
+	
+	//*************** Asset List*/
+	
+	$(".add-asset-button").click(function(){
+		var assetId = $(this).parents(".asset-info").find(".assetId").text();
+		$.get("/addAssetToCart?assetId=" + assetId, function() {
+			alert("Asset added to cart");
+		});
+	});
+	$(".remove-asset-button").click(function(){
+		var assetId = $(this).parents(".asset-info").find(".assetId").text();
+		$.get("/removeAssetFromCart?assetId=" + assetId, function() {
+			alert("Asset removed from cart");
+		});
+	});
+	 
 });
 
 
@@ -100,3 +130,7 @@ function validate()
            
    return( true );
 }
+
+
+
+

@@ -1,12 +1,16 @@
 @(asset : _root_.persistence.Asset)
 
 @frame("View Asset"){
-	<div class="view-entity asset-info">
+	<div class="asset-info">
 		<h3>@asset.getName() (@asset.getAssetId())</h3>
-		<table>
+		<table class="view-entity">
 			<tr>
 				<td>Asset ID</td>
 				<td><span class="assetId">@asset.getAssetId()</span></td>
+			</tr>
+			<tr>
+				<td>Asset Name</td>
+				<td><span class="assetId">@asset.getName()</span></td>
 			</tr>
 			<tr>
 				<td>Inventory Number</td>
@@ -33,9 +37,7 @@
 				<td>@asset.getDescription()</td>
 			</tr>
 		</table>
-		<a href="/editAsset?assetId=@asset.getAssetId()">Edit &raquo;</a>
-		<button type="button" class="asset-to-cart">Add To Cart</button>
-		<button type="button" class="asset-from-cart">Remove From Cart</button>
+		</br><a href="/editAsset?assetId=@asset.getAssetId()" class="editButton">Edit Info &raquo;</a>
 	</div>
 	
 	

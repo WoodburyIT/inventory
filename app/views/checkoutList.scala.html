@@ -1,0 +1,32 @@
+@(checkouts : java.util.List[_root_.persistence.CheckoutEvent])
+
+<table class="display selectable-table" cellspacing="0" width="100%" >
+        <thead>
+            <tr>
+                <th>Due</br>Date</th>
+                <th>First</br>Name</th>
+                <th>Last</br>Name</th>
+                <th>Email</br>Address</th>
+                <th>Assets</th>
+            </tr>
+        </thead>
+        <tbody>
+        	@for(checkout <- checkouts){
+        		<tr>
+        			<td>@checkout.getDueDate()</td>
+        			<td>@checkout.getCustomer().getFirstName()</td>
+        			<td>@checkout.getCustomer().getLastName()</td>
+        			<td>@checkout.getCustomer().getEmail()</td>
+        			<td>
+						@for(lineItem <- checkout.getLineItems()){
+							<span class="asset-text">@lineItem.getAsset().getName()</span>
+							<br>
+						}
+					</td>
+				</tr>
+			}
+        </tbody>
+    </table>
+</div>
+
+</div>

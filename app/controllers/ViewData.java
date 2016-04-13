@@ -16,6 +16,7 @@ import play.mvc.Result;
 import util.SessionHandler;
 
 public class ViewData extends Controller {
+	
 
 	@Transactional
 	public Result viewCart() {

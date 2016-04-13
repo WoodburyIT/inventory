@@ -1,0 +1,49 @@
+@(checkouts : java.util.List[_root_.persistence.CheckoutEvent],scheduledCheckouts : java.util.List[_root_.persistence.ScheduledCheckout])
+
+<table class="display selectable-table" cellspacing="0" width="100%" >
+        <thead>
+            <tr>
+                <th>Due</br>Date</th>
+                <th>Scheduled</br>Date</th>
+                <th>First</br>Name</th>
+                <th>Last</br>Name</th>
+                <th>Email</br>Address</th>
+                <th>Assets</th>
+            </tr>
+        </thead>
+        <tbody>
+        	@for(checkout <- checkouts){
+        		<tr>
+        			<td>@checkout.getDueDate()</td>
+        			<td></td>
+        			<td>@checkout.getCustomer().getFirstName()</td>
+        			<td>@checkout.getCustomer().getLastName()</td>
+        			<td>@checkout.getCustomer().getEmail()</td>
+        			<td>
+						@for(lineItem <- checkout.getLineItems()){
+							<span class="asset-text">@lineItem.getAsset().getName()</span>
+							<br>
+						}
+					</td>
+				</tr>
+			}
+			@for(scheduledCheckout <- scheduledCheckouts){
+        		<tr>
+        			<td></td>
+        			<td>@scheduledCheckout.getScheduledDate()</td>
+        			<td>@scheduledCheckout.getCustomer().getFirstName()</td>
+        			<td>@scheduledCheckout.getCustomer().getLastName()</td>
+        			<td>@scheduledCheckout.getCustomer().getEmail()</td>
+        			<td>
+						@for(lineItem <- scheduledCheckout.getLineItems()){
+							<span class="asset-text">@lineItem.getAsset().getName()</span>
+							<br>
+						}
+					</td>
+				</tr>
+			}
+        </tbody>
+    </table>
+</div>
+
+</div>

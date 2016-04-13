@@ -1,27 +1,58 @@
 package controllers;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import datadefinitions.AssetType;
 import persistence.Asset;
+import persistence.CheckoutEvent;
+import persistence.CheckoutLineItem;
 import persistence.Customer;
+import persistence.ScheduledCheckout;
 import persistence.TestEntity;
 import play.*;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
+import play.libs.Json;
 import play.mvc.*;
 import util.CheckoutDAO;
+import util.InvUtil;
+import util.SessionHandler;
 import views.html.*;
 
 public class Application extends Controller {
 
 	@Transactional
     public Result index() {
-		List<Asset> assets = CheckoutDAO.getCheckedOutAssets();
-		System.out.println("assets : " + assets.size());
-        return ok(views.html.index.render("Your new application is ready.")); 
+		List<ScheduledCheckout> scheds =CheckoutDAO.getScheduledCheckouts();
+		System.out.println("scheds : " + scheds.size());
+		return ok(Json.toJson(scheds)); 
     }
+	
+	@Transactional
+	public Result viewCheckouts() {
+		List<CheckoutEvent> checkouts = JPA.em().createQuery("from CheckoutEvent ce", CheckoutEvent.class).getResultList();
+		System.out.println("checkouts size : " + checkouts.size());
+		return ok(views.html.checkouts.render(checkouts));
+	}
+	
+	@Transactional
+	public Result viewPastCheckouts(int count, int offset) {
+		List<CheckoutEvent> checkouts = CheckoutDAO.getAllCheckoutEvents(count, offset);
+		List<ScheduledCheckout> scheduledCheckouts = CheckoutDAO.getScheduledCheckouts();
+		return ok(views.html.allCheckouts.render(checkouts, scheduledCheckouts));
+	}
+	
+	@Transactional
+	public Result viewScheduledCheckouts() {
+		List<ScheduledCheckout> checkouts = CheckoutDAO.getScheduledCheckouts();
+		System.out.println("checkouts size : " + checkouts.size());
+		return ok(views.html.scheduledCheckouts.render(checkouts));
+	}
 	
 	@Transactional
 	public Result viewAssets(){

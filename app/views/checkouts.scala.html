@@ -1,0 +1,8 @@
+@(checkouts : java.util.List[_root_.persistence.CheckoutEvent])
+
+@frame("Checkout List"){
+<div id="current-checkout-list-container">
+	<h2>Current Checkouts</h2>
+	@checkoutList(checkouts)
+</div>
+}

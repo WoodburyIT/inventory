@@ -21,7 +21,7 @@ public class Asset implements Comparable<Asset>{
 	private String name;
 	private String description;
 	private Date purchaseDate;			
-	private Integer priorityLevel;		// Ranged 1-10
+	private Integer priorityLevel;		// Ranged 1-10, 1 is highest priority
 	
 	private String assetType;
 	private Boolean reservable;

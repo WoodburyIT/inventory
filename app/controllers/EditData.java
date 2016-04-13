@@ -2,6 +2,7 @@ package controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,6 +26,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import util.InvUtil;
 import util.SessionHandler;
+
+import views.html.*;
 
 public class EditData extends Controller{
 	
@@ -61,6 +64,18 @@ public class EditData extends Controller{
 		session().remove("assetsInCart");
 		session().remove("customerInCart");
 		return ok();
+	}
+	
+	@Transactional
+	public Result viewCart(){
+		Set<Long> ids = SessionHandler.setFromCookie(session().get("assetsInCart"));
+		Long customerId = Long.parseLong(session().get("customerInCart"));
+		List<Asset> assets = new ArrayList<Asset>();
+		for(Long id : ids){
+			assets.add(JPA.em().find(Asset.class, id));
+		}
+		Customer customer = JPA.em().find(Customer.class, customerId);
+		return ok(views.html.viewCart.render(assets, customer));
 	}
 	
 	@Transactional
