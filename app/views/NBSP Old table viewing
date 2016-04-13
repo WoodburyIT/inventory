@@ -1,0 +1,20 @@
+<div>
+		<ul style="list-style-type:none">
+			<li>First Name:&thinsp;&thinsp;&thinsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Don</li>
+			<li>Last Name:&thinsp;&thinsp;&thinsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Donny</li>
+			
+			<li>Customer Email:&thinsp;&thinsp;&thinsp;&nbsp;&nbsp;&nbsp;&nbsp;DonDonny@gmail.com</li>
+			<li>Customer Phone:&thinsp;&thinsp;&thinsp;&nbsp;&nbsp;&nbsp;&nbsp;555-555-5555</li>
+			
+		</ul>
+	</div>
+
+<div>
+		<ul style="list-style-type:none">
+			<li>Asset Name:&emsp;&emsp;&emsp;&nbsp;&thinsp;Don</li>
+			
+			<li>Asset Type:&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;Customer</li>
+			<li>Priority Level:&emsp;&emsp;&nbsp;&nbsp;DonDonny@gmail.com</li>
+			
+		</ul>
+	</div>
