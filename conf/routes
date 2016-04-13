@@ -48,6 +48,8 @@ GET		/pastCheckouts			controllers.Application.viewPastCheckouts(count : Integer 
 
 GET		/viewCart				controllers.EditData.viewCart()
 
+GET		/immediateCheckout		controllers.Application.immediateCheckout()
+
 # Home page
 GET     /                           controllers.Application.index()
 

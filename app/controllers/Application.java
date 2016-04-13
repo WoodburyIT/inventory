@@ -34,6 +34,11 @@ public class Application extends Controller {
     }
 	
 	@Transactional
+	public Result immediateCheckout() {
+		return ok(views.html.immediateCheckout.render());
+	}
+	
+	@Transactional
 	public Result viewCheckouts() {
 		List<CheckoutEvent> checkouts = JPA.em().createQuery("from CheckoutEvent ce", CheckoutEvent.class).getResultList();
 		System.out.println("checkouts size : " + checkouts.size());

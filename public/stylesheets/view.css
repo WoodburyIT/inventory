@@ -980,7 +980,7 @@ table.cart-entity tr:first-child{
 	position:relative;
 	top:1px;
 }
-.newCustButton {
+.newEntityButton {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
 	background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
 	background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
@@ -1002,7 +1002,7 @@ table.cart-entity tr:first-child{
 	padding:5px 22px;
 	text-decoration:none;
 }
-.newCustButton:hover {
+.newEntityButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
 	background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
 	background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
@@ -1012,7 +1012,7 @@ table.cart-entity tr:first-child{
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
 	background-color:#019ad2;
 }
-.newCustButton:active {
+.newEntityButton:active {
 	position:relative;
 	top:1px;
 }

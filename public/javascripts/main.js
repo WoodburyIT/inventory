@@ -1,13 +1,11 @@
 $(function(){
-	var dateFields = $("#purchaseDate, #dateLost");
-	if(dateFields.size() > 0){
-		$('#dateFields').appendDtpicker({
+	$(".date-picker").each(function(){
+		$(this).appendDtpicker({
 			"inline": false,
 			"closeOnSelected": true,
 			"autodateOnStart": false
 		});
-	}
-	
+	})
 	
 	$(".asset-to-cart").click(function() {
 		var assetId = $(this).parents(".asset-info").find(".assetId").text();

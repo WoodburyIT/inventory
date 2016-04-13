@@ -25,7 +25,7 @@ function toggle(button) {
 </script>
 	
 <h2>List of Assets</h2>
-
+<a href="/newAsset" class="newEntityButton">Add New Asset</a>
 <div id="wrapper">
 <div id="leftcolumn">
                 <table id="example" class="display" cellspacing="0" width="100%">
@@ -74,37 +74,6 @@ function toggle(button) {
         </tbody>
     </table>
 </div>
-<div id="rightcolumn">
-<img src="assets/images/cart.png" width="128" height="128" alt="shopping cart icon" title="shopping cart">
-<p>
-<a href="#" class="chkNowButton">Checkout Immediately</a>
-</p>
-<p>
-<a href="#" class="schChkButton">Schedule For Checkout</a>
-</p>
-		<table class="cart-entity">
-			<tr>
-				<td>Customer Name</td>
-			</tr>
-			<tr>
-				<td><a href="#" class="xButton">X</a>&nbsp;Rumple Derpskin</td>
-			</tr>
-		</table>
-		</br>
-		<table class="cart-entity">
-			<tr>
-				<td>Asset Name(s)</td>
-			</tr>
-			<tr>
-				<td><a href="#" class="xButton">X</a>&nbsp;Dell Latitude Laptop 05</td>
-			</tr>
-			<tr>
-				<td><a href="#" class="xButton">X</a>&nbsp;Epson Projector 01</td>
-			</tr>
-			<tr>
-				<td><a href="#" class="xButton">X</a>&nbsp;Kensington Presentation Pointer 06</td>
-			</tr>
-		</table>
-</div>
+	@cartSidebar()
 </div>
 }
