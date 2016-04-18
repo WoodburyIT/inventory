@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   "org.hibernate" % "hibernate-entitymanager" % "4.3.0.Final",
   "com.google.guava" % "guava" % "18.0",
   "commons-io" % "commons-io" % "2.4",
+  "org.apache.commons" % "commons-email" % "1.4",
   "com.google.code.gson" % "gson" % "2.3.1",
   "mysql" % "mysql-connector-java" % "5.1.35"
 )

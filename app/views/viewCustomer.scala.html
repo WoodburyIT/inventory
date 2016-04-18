@@ -1,7 +1,8 @@
 @(customer : _root_.persistence.Customer)
 	
 @frame("View Customer"){
-
+<div id="wrapper">
+<div id="leftcolumn">
 	<div class="customer-info">
 		<h3>@customer.getFirstName() &nbsp; @customer.getLastName() &nbsp; (@customer.getCustomerId())</h3>
 		<table class="view-entity">
@@ -40,4 +41,7 @@
 		</table>
 		</br><a href="/editCustomer?customerId=@customer.getCustomerId()" class="editButton">Edit Info &raquo;</a>
 	</div>
+	</div>
+	@cartSidebar()
+</div>
 } 

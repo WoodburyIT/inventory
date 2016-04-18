@@ -34,8 +34,18 @@ public class Application extends Controller {
     }
 	
 	@Transactional
-	public Result immediateCheckout() {
-		return ok(views.html.immediateCheckout.render());
+	public Result calendar() {
+		return ok(views.html.calendar.render());
+	}
+	
+	@Transactional
+	public Result scheduleCheckoutForm() {
+		return ok(views.html.scheduleCheckoutForm.render());
+	}
+	
+	@Transactional
+	public Result immediateCheckoutForm() {
+		return ok(views.html.immediateCheckoutForm.render());
 	}
 	
 	@Transactional

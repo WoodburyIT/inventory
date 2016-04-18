@@ -1,21 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Checkout Asset Immediately</title>
-<link rel="stylesheet" type="text/css" href="assets/stylesheets/view.css" media="all">
-<script type="text/javascript" src="assets/javascripts/view.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="assets/javascripts/jquery.simple-dtpicker.js"></script>
-<link type="text/css" href="assets/stylesheets/jquery.simple-dtpicker.css" rel="stylesheet" />
-
-</head>
-<body id="main_body" >
+@frame("Immediate Checkout"){
 	
 	<img id="top" src="assets/images/top.png" alt="">
 	<div id="form_container">
 	
 		<h1><a>Checkout Asset Immediately</a></h1>
+		<div id="wrapper">
+<div id="leftcolumn">
 		<form id="form_1108616" class="appnitro"  method="post" action="">
 					<div class="form_description">
 			<h2>Checkout Asset Immediately</h2>
@@ -24,7 +14,7 @@
 			<ul >
 			
 			<label class="description" for="lbl_dueDateTime">* Due Date - Time </label></br>
-			<input type="text" name="dueDateTime" value="">
+			<input class="date-picker" type="text" name="dueDateTime" value="">
 		<script type="text/javascript">
 			$(function(){
 				$('*[name=dueDateTime]').appendDtpicker({
@@ -47,8 +37,10 @@
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
 		</li>
 			</ul>
-		</form>	
+		</form>
+		</div>
+		@cartSidebar()	
 	</div>
 	<img id="bottom" src="assets/images/bottom.png" alt="">
-	</body>
-</html>
+	</div>
+}

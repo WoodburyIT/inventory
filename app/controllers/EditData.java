@@ -31,6 +31,37 @@ import views.html.*;
 
 public class EditData extends Controller{
 	
+	public Result scheduleCheckout() throws ParseException{
+		System.out.println("checking out cart");
+		DynamicForm requestData = Form.form().bindFromRequest();
+		String dueDateString = requestData.get("dueDate");
+		String scheduledDateString = requestData.get("scheduledDate");
+		String assignedTo = requestData.get("assignedTo");
+		String notes = requestData.get("notes");
+		
+		Date dueDate = null;
+		Date scheduledDate = null;
+		if(dueDateString != null){
+			dueDate = InvUtil.getDateFormat().parse(dueDateString);
+			System.out.println("dueDate : " + dueDate);
+		}
+		if(scheduledDateString != null){
+			scheduledDate = InvUtil.getDateFormat().parse(scheduledDateString);
+			System.out.println("dueDate : " + scheduledDate);
+		}
+		
+		ScheduledCheckout scheduledCheckout = new ScheduledCheckout();
+		scheduledCheckout.setDueDate(dueDate);
+		scheduledCheckout.setScheduledDate(scheduledDate);
+		
+		Set<Long> ids = SessionHandler.setFromCookie(session().get("assetsInCart"));
+		Long customerId = Long.parseLong(session().get("customerInCart"));
+		
+		Customer customer = JPA.em().find(Customer.class, customerId);
+		
+		return ok();
+	}
+	
 	public Result addAssetToCart(Long assetId) {
 		System.out.println("assetId : " + assetId);
 		Set<Long> ids = SessionHandler.setFromCookie(session().get("assetsInCart"));

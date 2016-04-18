@@ -17,6 +17,8 @@ DELETE	/api/customer/:id				controllers.EditData.deleteCustomer(id : Long)
 
 GET		/api/assetlist					controllers.ViewData.assetList(count : Integer ?= 20, offset : Integer ?= 0, priority : Integer?= 0, search : String ?= null)
 
+GET		/api/scheduledCheckouts			controllers.ViewData.scheduledCheckouts(month : Integer  ?= 0, year : Integer  ?= 0)
+
 GET		/addAssetToCart					controllers.EditData.addAssetToCart(assetId: Long)
 GET		/assignCustomerToCart			controllers.EditData.assignCustomerToCart(customerId:Long)
 GET		/removeAssetFromCart			controllers.EditData.removeAssetFromCart(assetId : Long)
@@ -48,10 +50,20 @@ GET		/pastCheckouts			controllers.Application.viewPastCheckouts(count : Integer 
 
 GET		/viewCart				controllers.EditData.viewCart()
 
-GET		/immediateCheckout		controllers.Application.immediateCheckout()
+GET		/immediateCheckoutForm	controllers.Application.immediateCheckoutForm()
+GET		/scheduleCheckoutForm	controllers.Application.scheduleCheckoutForm()
+
+GET		/calendar				controllers.Application.calendar()
 
 # Home page
 GET     /                           controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
+
+
+#*****************   Mail
+
+GET		/testMail				controllers.Mail.testMail()

@@ -13,6 +13,7 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.CheckoutDAO;
 import util.SessionHandler;
 
 public class ViewData extends Controller {
@@ -81,4 +82,9 @@ public class ViewData extends Controller {
 		List<Asset> assets = q.setMaxResults(count).setFirstResult(offset).getResultList();
         return ok(Json.toJson(assets)); 
     }
+	
+	@Transactional
+	public Result scheduledCheckouts(int month, int year){
+		return ok(Json.toJson(CheckoutDAO.getScheduledCheckouts()));
+	}
 }

@@ -1,0 +1,21 @@
+@(checkoutEvent : _root_.persistence.CheckoutEvent)
+<html>
+<head></head>
+<body>
+	<p>Dear @checkoutEvent.getCustomer().getFirstname() @checkoutEvent.getCustomer().getFirstname()</p>
+	<p>You have a checkout from the WBIT office that is due today.  Please return the following asset(s) as soon as you can.</p>
+	<ul> 
+		@for(lineItem <- checkoutEvent.getLineItems()){
+			<li>@lineItem.getAsset.getName() - @lineItem.getAsset().getAssetType() - @lineItem.getDueDate()</li>
+		}
+	</ul>
+	<p>Please contact us if you have any questions.</p>
+	<p>Thanks,</p>
+	<p>	
+		Woodbury Business Information Technology Support<br>
+		Email : <a href="mailto:wbit@uvu.edu">WBIT@uvu.edu</a><br>
+		Phone : 801-863-6155<br>
+		Office : WB133
+	</p>
+</body>
+</html>

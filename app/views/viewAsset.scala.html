@@ -1,6 +1,8 @@
 @(asset : _root_.persistence.Asset)
 
 @frame("View Asset"){
+<div id="wrapper">
+<div id="leftcolumn">
 	<div class="asset-info">
 		<h3>@asset.getName() (@asset.getAssetId())</h3>
 		<table class="view-entity">
@@ -39,6 +41,8 @@
 		</table>
 		</br><a href="/editAsset?assetId=@asset.getAssetId()" class="editButton">Edit Info &raquo;</a>
 	</div>
-	
+	</div>
+	@cartSidebar()
+</div>
 	
 }
