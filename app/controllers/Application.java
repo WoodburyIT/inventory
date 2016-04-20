@@ -33,6 +33,10 @@ public class Application extends Controller {
 		return ok(Json.toJson(scheds)); 
     }
 	
+	public Result testing() {
+		return ok(views.html.testing.render());
+	}
+	
 	@Transactional
 	public Result calendar() {
 		return ok(views.html.calendar.render());

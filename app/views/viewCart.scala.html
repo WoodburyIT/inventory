@@ -3,8 +3,8 @@
 
 <div id="cart-view">
 		<img  class="wtf" src="assets/images/cart.png" width="128" height="128" alt="shopping cart icon" title="shopping cart">
-		<p>		<a href="/immediateCheckout" class="chkNowButton">Checkout Immediately</a></p>
-		<p>		<a href="/scheduleCheckout" class="schChkButton">Schedule For Checkout</a>	</p>
+		<p>		<a href="/immediateCheckoutForm" class="chkNowButton">Checkout Immediately</a></p>
+		<p>		<a href="/scheduleCheckoutForm" class="schChkButton">Schedule For Checkout</a>	</p>
 		<table class="cart-entity">
 			<tr>
 				<td>Customer Name</td>
@@ -20,11 +20,28 @@
 			</tr>
 			@for(asset <- assets){
 				<tr>
-					<td><a href="#" data-assetId="@asset.getAssetId()" class="xButton remove-asset-button">X</a><a href="/asset?assetId=@asset.getAssetId()">@asset.getName()</a></td>
+					<td>
+						<a href="#" data-assetId="@asset.getAssetId()" class="xButton remove-asset-button wtf">X</a><a href="/asset?assetId=@asset.getAssetId()">@asset.getName()</a>
+					</td>
 				</tr>
 			
 			}
 		</table>
 
-
+<script type="text/javascript">
+	$(".remove-asset-button").click(function(){
+		var assetId = $(this).attr("data-assetId");
+		$.get("/removeAssetFromCart?assetId=" + assetId, function() {
+			$("#rightcolumn").load("/viewCart");
+		});
+	});
+	
+	
+	//****************  Cart
+	$(".remove-customer-button").click(function() {
+		$.get("/removeCustomerFromCart", function() {
+			$("#rightcolumn").load("/viewCart");
+		});
+	});
+</script>
 </div>

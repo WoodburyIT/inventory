@@ -44,28 +44,13 @@ $(function(){
 	
 	//*************** Asset List*/
 	
-	$(".add-asset-button").on("click", function(){
-		alert("added asset");
+	$(".asset-info .addButton").on("click", function(){
 		var assetId = $(this).parents(".asset-info").find(".assetId").text();
 		$.get("/addAssetToCart?assetId=" + assetId, function() {
-			alert("Asset added to cart");
-		});
-	});
-	$(".remove-asset-button").click(function(){
-		var assetId = $(this).parents(".asset-info").find(".assetId").text();
-		$.get("/removeAssetFromCart?assetId=" + assetId, function() {
-			alert("Asset removed from cart");
+			$("#rightcolumn").load("/viewCart");
 		});
 	});
 	
-	
-	//****************  Cart
-	$(".remove-customer-button").click(function() {
-		alert("clicked remove customer");
-		$.get("/removeCustomerFromCart", function() {
-			$("#right-column").load("/viewCart");
-		});
-	});
 });
 
 

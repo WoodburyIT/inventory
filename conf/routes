@@ -31,7 +31,7 @@ GET		/removeCustomerFromCart			controllers.EditData.removeCutomerFromCart()
 
 GET		/asset/inventorynum/:invNum	controllers.ViewData.byInventoryNum(invNum: String)
 
-
+GET		/wtf					controllers.Application.testing()
 
 	
 GET		/newAsset				controllers.Application.newAssetForm()

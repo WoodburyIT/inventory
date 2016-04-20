@@ -1,0 +1,18 @@
+@frame("Calendar"){
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var scheduledCheckouts = $.get("/api/scheduledCheckouts", function(response) {
+		var calendarEntries = [];
+		for(var i = 0; i < response.length; i++){
+			var scheduledCheckout = {"id" : response[i].scheduledCheckoutId,
+					"title" : response[i].customer.firstName + " " + response[i].customer.lastName,
+					"start" : new Date(response[i].scheduledDate)}
+			calendarEntries.push(scheduledCheckout);
+		}
+		alert("calendarEntries : " + JSON.stringify(calendarEntries));
+		
+	});
+})
+</script>
+}
