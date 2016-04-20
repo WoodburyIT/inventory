@@ -1,29 +1,30 @@
 @(assets : java.util.List[_root_.persistence.Asset], customer : _root_.persistence.Customer)
 
-@frame("View Cart") {
 
-
-	<h3>Assets in Cart</h3>
-	<table id="assets-in-cart">
-		@for(asset <- assets){
+<div id="cart-view">
+		<img  class="wtf" src="assets/images/cart.png" width="128" height="128" alt="shopping cart icon" title="shopping cart">
+		<p>		<a href="/immediateCheckout" class="chkNowButton">Checkout Immediately</a></p>
+		<p>		<a href="/scheduleCheckout" class="schChkButton">Schedule For Checkout</a>	</p>
+		<table class="cart-entity">
 			<tr>
-				<td><a href="/asset?assetId=@asset.getAssetId()">@asset.getName()</a></td>
-				<td>@asset.getAssetType()</td>
-				<td><button type="button" class="remove-asset-button">Remove From Cart</button></td>
+				<td>Customer Name</td>
 			</tr>
-		}
-	</table>
-	
-	<h3> Customer in Cart</h3>
-	<div id="customer-in-cart">
-		<p>@customer.getFirstName() @customer.getLastName()</p>
-		<p>@customer.getCustomerType()</p>
-		<p>@customer.getUvid()</p>
-		<td><button type="button" class="remove-customer-button">Remove From Cart</button></td>
-	</div>
-	
-	<a href="/checkoutCart">Checkout Cart &raquo;</a>
-	<a href="/scheduleCart">Schedule Cart &raquo;</a>
+			<tr>
+				<td><a href="#" class="xButton remove-customer-button">X</a> <a href="/customer?customerId=@customer.getCustomerId()">@customer.getFirstName() @customer.getLastName()</a></td>
+			</tr>
+		</table>
+		</br>
+		<table class="cart-entity">
+			<tr>
+				<td>Asset Name(s)</td>
+			</tr>
+			@for(asset <- assets){
+				<tr>
+					<td><a href="#" data-assetId="@asset.getAssetId()" class="xButton remove-asset-button">X</a><a href="/asset?assetId=@asset.getAssetId()">@asset.getName()</a></td>
+				</tr>
+			
+			}
+		</table>
 
 
-}
+</div>

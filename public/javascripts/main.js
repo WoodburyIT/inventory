@@ -44,7 +44,8 @@ $(function(){
 	
 	//*************** Asset List*/
 	
-	$(".add-asset-button").click(function(){
+	$(".add-asset-button").on("click", function(){
+		alert("added asset");
 		var assetId = $(this).parents(".asset-info").find(".assetId").text();
 		$.get("/addAssetToCart?assetId=" + assetId, function() {
 			alert("Asset added to cart");
@@ -56,7 +57,15 @@ $(function(){
 			alert("Asset removed from cart");
 		});
 	});
-	 
+	
+	
+	//****************  Cart
+	$(".remove-customer-button").click(function() {
+		alert("clicked remove customer");
+		$.get("/removeCustomerFromCart", function() {
+			$("#right-column").load("/viewCart");
+		});
+	});
 });
 
 

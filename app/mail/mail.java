@@ -17,7 +17,7 @@ public class mail {
     private static final String SMTP_AUTH_PWD  = "Rum@1lm@n";
     private static final String FROM_FIELD = "wbit@uvu.edu";
     
-	public static void dueToday(CheckoutEvent checkoutEvent){
+	public static void dueToday(CheckoutEvent checkoutEvent) throws Exception{
 		System.out.println("Sending some mail");
 		HtmlEmail email = new HtmlEmail();
 	    email.setSmtpPort(PORT);
@@ -26,7 +26,7 @@ public class mail {
 	    email.setHostName(SMTP_HOST_NAME);
 	    email.setFrom(FROM_FIELD);
 	    email.setSubject("Your checkout from WBIT is due today");
-	    email.setMsg(views.html.dueToday.render(checkoutEvent));
+	    email.setMsg(views.html.dueToday.render(checkoutEvent) + "");
 	    email.addTo("mail@jdclark.biz");
 	    email.send();
 	    System.out.println("Mail sent!");
